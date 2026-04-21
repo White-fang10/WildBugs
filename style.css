@@ -469,6 +469,8 @@ input, textarea { font-family: inherit; }
   transform: translate(-50%, -58%);
   animation: bug-bounce 2.5s ease-in-out infinite;
   filter: drop-shadow(4px 8px 18px rgba(0,0,0,0.16));
+  max-width: 90%;
+  height: auto;
 }
 @keyframes bug-bounce {
   0%, 100% { transform: translate(-50%, -58%); }
