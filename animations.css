@@ -1,0 +1,514 @@
+/* ============================================
+   WILD BUGS — animations.css
+   Premium animation layer
+   ============================================ */
+
+/* ─────────────────────────────────────────────
+   GRAIN OVERLAY
+───────────────────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  /* Animation paused — static grain is cheaper and still looks great */
+  /* animation: grain-drift 8s steps(10) infinite; */
+}
+@keyframes grain-drift {
+  0%,100% { transform: translate(0, 0); }
+  10%  { transform: translate(-2%, -2%); }
+  20%  { transform: translate(2%, 1%); }
+  30%  { transform: translate(-1%, 3%); }
+  40%  { transform: translate(3%, -1%); }
+  50%  { transform: translate(-2%, 2%); }
+  60%  { transform: translate(1%, -3%); }
+  70%  { transform: translate(-3%, 1%); }
+  80%  { transform: translate(2%, 2%); }
+  90%  { transform: translate(-1%, -2%); }
+}
+
+/* ─────────────────────────────────────────────
+   PAGE LOADER
+───────────────────────────────────────────── */
+#pageLoader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: var(--neu-bg, #dfe6e2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+#pageLoader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loader-bug {
+  animation: loader-bounce 0.8s ease-in-out infinite alternate;
+  filter: drop-shadow(3px 6px 12px rgba(0,0,0,0.15));
+}
+@keyframes loader-bounce {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-16px); }
+}
+.loader-bar {
+  width: 160px;
+  height: 5px;
+  background: var(--neu-bg, #dfe6e2);
+  box-shadow: inset 3px 3px 8px #aebdb8, inset -3px -3px 8px #f8fffc;
+  border-radius: 99px;
+  overflow: hidden;
+  padding: 1px 2px;
+}
+.loader-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #2b7a48, #56b87a);
+  border-radius: 99px;
+  animation: loader-fill 1.2s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+@keyframes loader-fill {
+  0%   { width: 0%; }
+  60%  { width: 80%; }
+  100% { width: 100%; }
+}
+.loader-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  color: var(--green, #3a9e5f);
+  text-transform: uppercase;
+}
+
+/* ─────────────────────────────────────────────
+   ENHANCED CURSOR — label ring
+───────────────────────────────────────────── */
+#cursorLabel {
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+#cursorRing.cursor-view {
+  width: 70px !important;
+  height: 70px !important;
+  background: rgba(76,175,80,0.85) !important;
+  border-color: transparent !important;
+  mix-blend-mode: normal;
+}
+#cursorRing.cursor-open {
+  width: 56px !important;
+  height: 56px !important;
+  background: rgba(17,17,17,0.8) !important;
+  border-color: transparent !important;
+}
+
+/* ─────────────────────────────────────────────
+   WORD-SPLIT HERO ANIMATION
+───────────────────────────────────────────── */
+.word-wrap {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+.word-inner {
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.word-inner.word-animate {
+  animation: word-rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes word-rise {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Hero sub text — overrides style.css fadeSlideDown with better easing */
+.hero-sub {
+  opacity: 0;
+  animation: fade-up 0.8s 0.8s cubic-bezier(0.22,1,0.36,1) forwards !important;
+}
+/* hero-badge, hero-actions, hero-stats use style.css fadeSlideDown — no override needed */
+
+.hero-visual {
+  opacity: 0;
+  transform: translateY(30px) scale(0.96);
+  animation: hero-visual-in 1s 0.5s cubic-bezier(0.22,1,0.36,1) forwards !important;
+}
+@keyframes hero-visual-in {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes fade-up {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─────────────────────────────────────────────
+   HERO — animated blobs in background
+───────────────────────────────────────────── */
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  transform: translateZ(0); /* GPU layer */
+  will-change: transform;
+}
+.hero-blob-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(76,175,80,0.12) 0%, transparent 70%);
+  filter: blur(60px); /* reduced from 80px */
+  top: -100px; right: -100px;
+  animation: blob-drift-1 12s ease-in-out infinite;
+}
+.hero-blob-2 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(129,199,132,0.1) 0%, transparent 70%);
+  filter: blur(50px); /* reduced from 80px */
+  bottom: 0; left: -80px;
+  animation: blob-drift-2 15s ease-in-out infinite 2s;
+}
+@keyframes blob-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%  { transform: translate(-30px, 20px) scale(1.05); }
+  66%  { transform: translate(20px, -30px) scale(0.95); }
+}
+@keyframes blob-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(20px, -20px) scale(1.08); }
+}
+
+/* ─────────────────────────────────────────────
+   NAV LINKS — smooth clip underline
+───────────────────────────────────────────── */
+.nav-link:not(.btn) {
+  position: relative;
+}
+.nav-link:not(.btn)::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0%; height: 1.5px;
+  background: var(--green);
+  border-radius: 1px;
+  transition: width 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.nav-link:not(.btn):hover::after,
+.nav-link:not(.btn).active::after {
+  width: 100%;
+}
+
+/* ─────────────────────────────────────────────
+   BUTTON — premium fill sweep
+───────────────────────────────────────────── */
+/* Neumorphic buttons — style.css handles hover states via background/shadow changes.
+   animations.css only adds the shimmer sweep on primary button. */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.18);
+  transform: translateX(-100%) skewX(-12deg);
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  z-index: -1;
+  border-radius: inherit;
+}
+.btn-primary:hover::before {
+  transform: translateX(120%) skewX(-12deg);
+}
+
+/* btn-outline: no pseudo overlay needed — style.css bg transition handles it */
+
+/* ─────────────────────────────────────────────
+   PROJECT CARDS — premium hover
+───────────────────────────────────────────── */
+.project-card {
+  transition: box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+  contain: layout style;
+}
+.project-card:hover {
+  /* Neumorphic: deeper raised shadow on hover */
+  box-shadow: 12px 12px 30px #a4b5af, -12px -12px 30px #ffffff;
+}
+.project-img-placeholder,
+.project-card img {
+  transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+.project-card:hover .project-img-placeholder,
+.project-card:hover img {
+  transform: scale(1.06);
+}
+
+/* Project overlay text on hover */
+.project-hover-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(17,17,17,0.5);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: inherit;
+}
+.project-hover-label span {
+  color: white;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  transform: translateY(12px);
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+.project-card:hover .project-hover-label {
+  opacity: 1;
+}
+.project-card:hover .project-hover-label span {
+  transform: translateY(0);
+}
+
+/* ─────────────────────────────────────────────
+   TEAM CARDS — lift + glow on hover
+───────────────────────────────────────────── */
+.team-card {
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1),
+              box-shadow 0.4s ease;
+  will-change: transform;
+}
+.team-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 10px 10px 28px #a4b5af, -10px -10px 28px #ffffff;
+}
+
+/* ─────────────────────────────────────────────
+   SKILL CIRCLES — pop + glow on hover
+───────────────────────────────────────────── */
+.skill-circle-item {
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.skill-circle-item:hover {
+  transform: translateY(-6px) scale(1.05);
+}
+
+/* ─────────────────────────────────────────────
+   FLOAT IN (enhanced) from different directions
+───────────────────────────────────────────── */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.93);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34,1.56,0.64,1);
+}
+.reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+/* ─────────────────────────────────────────────
+   SECTION DIVIDER — animated line
+───────────────────────────────────────────── */
+.section-divider {
+  display: block;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+  margin: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.section-divider.visible { opacity: 0.3; }
+
+/* ─────────────────────────────────────────────
+   PROCESS STEPS — alternating reveal
+───────────────────────────────────────────── */
+.process-step:nth-child(even) {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.process-step:nth-child(odd) {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22,1,0.36,1);
+}
+.process-step.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ─────────────────────────────────────────────
+   MARQUEE — glow edge fade
+───────────────────────────────────────────── */
+.marquee-section {
+  position: relative;
+}
+.marquee-section::before,
+.marquee-section::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+.marquee-section::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--neu-bg, #dfe6e2), transparent);
+}
+.marquee-section::after {
+  right: 0;
+  background: linear-gradient(-90deg, var(--neu-bg, #dfe6e2), transparent);
+}
+
+/* ─────────────────────────────────────────────
+   FOOTER LINKS — hover slide
+───────────────────────────────────────────── */
+.footer-link {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+.footer-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 1px;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+.footer-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ─────────────────────────────────────────────
+   CONTACT FORM — field focus glow
+───────────────────────────────────────────── */
+.form-input:focus,
+.form-textarea:focus {
+  box-shadow: 0 0 0 3px rgba(76,175,80,0.15), 0 0 20px rgba(76,175,80,0.08);
+}
+
+/* ─────────────────────────────────────────────
+   STAT ITEMS — subtle stagger (no re-animation, style.css handles it)
+───────────────────────────────────────────── */
+/* stat items already animated by style.css via hero-stats fadeSlideDown */
+
+/* ─────────────────────────────────────────────
+   BUG MASCOT — subtle glow pulse
+───────────────────────────────────────────── */
+/* Neumorphic mascot stage — the circular raised panel + subtle inner glow */
+.bug-stage::after {
+  content: '';
+  position: absolute;
+  inset: 18%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(58,158,95,0.09) 0%, transparent 70%);
+  animation: mascot-glow 3.5s ease-in-out infinite;
+  z-index: 0;
+  pointer-events: none;
+}
+@keyframes mascot-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 0.9; transform: scale(1.12); }
+}
+
+/* Orbit bugs scale on hover */
+.orbit-bug {
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  cursor: default;
+}
+.orbit-bug:hover {
+  transform: scale(1.4) rotate(15deg) !important;
+  animation-play-state: paused;
+}
+
+/* ─────────────────────────────────────────────
+   BACK TO TOP — premium style
+───────────────────────────────────────────── */
+#back-top {
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1),
+              opacity 0.3s ease,
+              box-shadow 0.3s ease;
+}
+#back-top:hover {
+  transform: translateY(-3px) scale(1.05);
+  /* Neumorphic: press inward on hover */
+  box-shadow: inset 4px 4px 10px #aebdb8, inset -4px -4px 10px #f8fffc;
+  color: var(--green);
+}
+
+/* ─────────────────────────────────────────────
+   SMOOTH SECTION TRANSITIONS (custom easing)
+───────────────────────────────────────────── */
+.reveal,
+.reveal-left,
+.reveal-right,
+.reveal-scale {
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+.reveal-delay-1 { transition-delay: 0.1s !important; }
+.reveal-delay-2 { transition-delay: 0.2s !important; }
+.reveal-delay-3 { transition-delay: 0.3s !important; }
+.reveal-delay-4 { transition-delay: 0.4s !important; }
+
+/* ─────────────────────────────────────────────
+   GSAP INITIAL STATES (prevent flash)
+   When GSAP will control these, hide them first
+───────────────────────────────────────────── */
+.gsap-fade {
+  opacity: 0;
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  #cursorDot, #cursorRing, #cursorLabel { display: none; }
+  .hero-blob { opacity: 0.5; }
+  body::after { display: none; }
+  .process-step:nth-child(even),
+  .process-step:nth-child(odd) {
+    transform: translateY(30px);
+  }
+}

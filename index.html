@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wild Bugs — We Build Clean, Powerful Websites</title>
+  <meta name="description" content="Wild Bugs is a creative web development team that builds clean, powerful, and modern websites — without the bugs. Explore our portfolio, skills, and team." />
+  <meta property="og:title" content="Wild Bugs — Creative Web Development Team" />
+  <meta property="og:description" content="We build clean, powerful websites — without the bugs. Modern, interactive, and beautiful web experiences." />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="animations.css" />
+  <!-- Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+</head>
+<body>
+
+  <!-- ─── Page Loader ─── -->
+  <div id="pageLoader">
+    <svg class="loader-bug" width="64" height="64" viewBox="0 0 220 260" fill="none">
+      <ellipse cx="110" cy="165" rx="65" ry="75" fill="#4CAF50"/>
+      <ellipse cx="90" cy="140" rx="22" ry="30" fill="rgba(255,255,255,0.15)"/>
+      <ellipse cx="110" cy="90" rx="46" ry="42" fill="#388E3C"/>
+      <circle cx="90" cy="88" r="18" fill="white"/>
+      <circle cx="130" cy="88" r="18" fill="white"/>
+      <circle cx="93" cy="89" r="10" fill="#111"/>
+      <circle cx="133" cy="89" r="10" fill="#111"/>
+      <circle cx="97" cy="84" r="4" fill="white"/>
+      <circle cx="137" cy="84" r="4" fill="white"/>
+      <path d="M95 108 Q110 122 125 108" stroke="#1B5E20" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+      <line x1="90" y1="50" x2="64" y2="20" stroke="#388E3C" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="62" cy="17" r="6" fill="#4CAF50"/>
+      <line x1="130" y1="50" x2="156" y2="20" stroke="#388E3C" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="158" cy="17" r="6" fill="#4CAF50"/>
+    </svg>
+    <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    <div class="loader-text">Wild Bugs</div>
+  </div>
+
+  <!-- ─── Scroll Progress Bar ─── -->
+  <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
+  <!-- ─── Custom Cursor ─── -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div id="cursorLabel"></div>
+
+  <!-- ─── Back to Top ─── -->
+  <button id="back-top" aria-label="Back to top">↑</button>
+
+  <!-- ============================================
+       NAVIGATION
+  ============================================ -->
+  <nav id="navbar">
+    <div class="container nav-inner">
+      <a href="#hero" class="nav-logo">
+        <!-- Inline Bug Logo SVG -->
+        <img src="wildbugs-logo.png" alt="Wild Bugs" class="nav-logo-bug" />
+        Wild Bugs
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#team" class="nav-link">Team</a></li>
+        <li><a href="#process" class="nav-link">Process</a></li>
+        <li><a href="#contact" class="nav-link nav-cta btn btn-primary btn-sm">Say Hello <i class="bx bxs-bug"></i></a></li>
+      </ul>
+
+      <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#projects" class="nav-link" data-close-nav>Projects</a>
+    <a href="#skills" class="nav-link" data-close-nav>Skills</a>
+    <a href="#team" class="nav-link" data-close-nav>Team</a>
+    <a href="#process" class="nav-link" data-close-nav>Process</a>
+    <a href="#contact" class="nav-link" data-close-nav>Contact</a>
+  </div>
+
+  <!-- ============================================
+       HERO
+  ============================================ -->
+  <section id="hero">
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="hero-bg-dots"></div>
+    <div class="container">
+      <div class="hero-inner">
+        <!-- Content -->
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Open for new projects in 2025
+          </div>
+          <h1 class="hero-title">
+            We build <span class="highlight">clean, powerful</span><br/>
+            websites — without<br/>
+            the bugs.
+          </h1>
+          <p class="hero-sub">
+            Wild Bugs is a passionate web development team crafting pixel-perfect, blazing-fast digital experiences. From idea to launch, we squash every bug along the way.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">View Our Work <i class="bx bx-rocket"></i></a>
+            <a href="#contact" class="btn btn-outline">Get in Touch</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item"><div class="stat-num" data-count="48">0</div><div class="stat-label">Projects Shipped</div></div>
+            <div class="stat-item"><div class="stat-num" data-count="100">0</div><div class="stat-label">% Bug-Free Dev</div></div>
+            <div class="stat-item"><div class="stat-num" data-count="5">0</div><div class="stat-label">Team Members</div></div>
+          </div>
+        </div>
+
+        <!-- Bug Mascot Visual -->
+        <div class="hero-visual">
+          <div class="bug-stage">
+            <div class="bug-shadow"></div>
+
+            <!-- Main mascot SVG - 3D Cute Wild Bug -->
+            <svg class="bug-mascot" id="bugMascot" width="260" height="300" viewBox="0 0 260 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Body: lit top-left, dark bottom-right -->
+                <radialGradient id="bGrad" cx="34%" cy="26%" r="72%">
+                  <stop offset="0%"   stop-color="#A5D6A7"/>
+                  <stop offset="28%"  stop-color="#66BB6A"/>
+                  <stop offset="62%"  stop-color="#43A047"/>
+                  <stop offset="100%" stop-color="#1B5E20"/>
+                </radialGradient>
+                <!-- Head gradient -->
+                <radialGradient id="hGrad" cx="36%" cy="28%" r="70%">
+                  <stop offset="0%"   stop-color="#81C784"/>
+                  <stop offset="38%"  stop-color="#4CAF50"/>
+                  <stop offset="100%" stop-color="#2E7D32"/>
+                </radialGradient>
+                <!-- Eye white -->
+                <radialGradient id="ewL" cx="36%" cy="32%" r="68%">
+                  <stop offset="0%"   stop-color="#FFFFFF"/>
+                  <stop offset="100%" stop-color="#E8F5E9"/>
+                </radialGradient>
+                <radialGradient id="ewR" cx="36%" cy="32%" r="68%">
+                  <stop offset="0%"   stop-color="#FFFFFF"/>
+                  <stop offset="100%" stop-color="#E8F5E9"/>
+                </radialGradient>
+                <!-- Blue iris -->
+                <radialGradient id="irisL" cx="38%" cy="32%" r="68%">
+                  <stop offset="0%"   stop-color="#42A5F5"/>
+                  <stop offset="45%"  stop-color="#1565C0"/>
+                  <stop offset="100%" stop-color="#0D47A1"/>
+                </radialGradient>
+                <radialGradient id="irisR" cx="38%" cy="32%" r="68%">
+                  <stop offset="0%"   stop-color="#42A5F5"/>
+                  <stop offset="45%"  stop-color="#1565C0"/>
+                  <stop offset="100%" stop-color="#0D47A1"/>
+                </radialGradient>
+                <!-- Wing gradient -->
+                <linearGradient id="wgL" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%"   stop-color="rgba(200,240,200,0.75)"/>
+                  <stop offset="100%" stop-color="rgba(165,214,167,0.20)"/>
+                </linearGradient>
+                <linearGradient id="wgR" x1="100%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%"   stop-color="rgba(200,240,200,0.75)"/>
+                  <stop offset="100%" stop-color="rgba(165,214,167,0.20)"/>
+                </linearGradient>
+                <!-- Antenna ball -->
+                <radialGradient id="aGrad" cx="35%" cy="30%" r="70%">
+                  <stop offset="0%"   stop-color="#A5D6A7"/>
+                  <stop offset="100%" stop-color="#2E7D32"/>
+                </radialGradient>
+                <!-- Filters -->
+                <filter id="fShadow" x="-25%" y="-25%" width="150%" height="150%">
+                  <feDropShadow dx="2" dy="5" stdDeviation="7" flood-color="rgba(0,0,0,0.28)"/>
+                </filter>
+                <filter id="fEye" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="rgba(0,0,0,0.30)"/>
+                </filter>
+                <filter id="fBlur">
+                  <feGaussianBlur stdDeviation="2.5"/>
+                </filter>
+                <filter id="fBlur1">
+                  <feGaussianBlur stdDeviation="1.2"/>
+                </filter>
+              </defs>
+
+              <!-- ── WINGS (behind body) ── -->
+              <ellipse cx="68" cy="188" rx="56" ry="24" fill="url(#wgL)" stroke="rgba(76,175,80,0.5)" stroke-width="1.2" transform="rotate(-28 68 188)"/>
+              <path d="M90 174 Q70 182 52 196" stroke="rgba(76,175,80,0.45)" stroke-width="1" fill="none"/>
+              <path d="M86 181 Q66 187 56 202" stroke="rgba(76,175,80,0.30)" stroke-width="0.8" fill="none"/>
+              <ellipse cx="192" cy="188" rx="56" ry="24" fill="url(#wgR)" stroke="rgba(76,175,80,0.5)" stroke-width="1.2" transform="rotate(28 192 188)"/>
+              <path d="M170 174 Q190 182 208 196" stroke="rgba(76,175,80,0.45)" stroke-width="1" fill="none"/>
+              <path d="M174 181 Q194 187 204 202" stroke="rgba(76,175,80,0.30)" stroke-width="0.8" fill="none"/>
+
+              <!-- ── LEGS ── -->
+              <!-- Left -->
+              <path d="M62 170 Q38 161 18 154" stroke="#2E7D32" stroke-width="3.8" stroke-linecap="round" fill="none"/>
+              <path d="M60 192 Q34 192 14 192" stroke="#2E7D32" stroke-width="3.8" stroke-linecap="round" fill="none"/>
+              <path d="M62 212 Q38 221 18 232" stroke="#2E7D32" stroke-width="3.8" stroke-linecap="round" fill="none"/>
+              <ellipse cx="15" cy="153" rx="9" ry="5" fill="#1B5E20" transform="rotate(-18 15 153)"/>
+              <ellipse cx="11" cy="192" rx="9" ry="5" fill="#1B5E20"/>
+              <ellipse cx="15" cy="233" rx="9" ry="5" fill="#1B5E20" transform="rotate(18 15 233)"/>
+              <!-- Right -->
+              <path d="M198 170 Q222 161 242 154" stroke="#2E7D32" stroke-width="3.8" stroke-linecap="round" fill="none"/>
+              <path d="M200 192 Q226 192 246 192" stroke="#2E7D32" stroke-width="3.8" stroke-linecap="round" fill="none"/>
+              <path d="M198 212 Q222 221 242 232" stroke="#2E7D32" stroke-width="3.8" stroke-linecap="round" fill="none"/>
+              <ellipse cx="245" cy="153" rx="9" ry="5" fill="#1B5E20" transform="rotate(18 245 153)"/>
+              <ellipse cx="249" cy="192" rx="9" ry="5" fill="#1B5E20"/>
+              <ellipse cx="245" cy="233" rx="9" ry="5" fill="#1B5E20" transform="rotate(-18 245 233)"/>
+
+              <!-- ── BODY ── -->
+              <!-- Ambient shadow blob -->
+              <ellipse cx="134" cy="212" rx="76" ry="82" fill="rgba(0,0,0,0.10)" filter="url(#fBlur)"/>
+              <!-- Main body sphere -->
+              <ellipse cx="130" cy="204" rx="74" ry="80" fill="url(#bGrad)" filter="url(#fShadow)"/>
+              <!-- Center seam -->
+              <line x1="130" y1="126" x2="130" y2="282" stroke="rgba(0,0,0,0.14)" stroke-width="2.2" stroke-linecap="round"/>
+              <!-- Segments -->
+              <ellipse cx="130" cy="172" rx="72" ry="5" fill="rgba(0,0,0,0.10)"/>
+              <ellipse cx="130" cy="200" rx="70" ry="4.5" fill="rgba(0,0,0,0.09)"/>
+              <ellipse cx="130" cy="226" rx="65" ry="4" fill="rgba(0,0,0,0.08)"/>
+              <ellipse cx="130" cy="250" rx="55" ry="3.5" fill="rgba(0,0,0,0.06)"/>
+              <!-- Primary highlight (large, soft) -->
+              <ellipse cx="98" cy="158" rx="34" ry="50" fill="rgba(255,255,255,0.20)" transform="rotate(-12 98 158)" filter="url(#fBlur1)"/>
+              <!-- Specular (sharp) -->
+              <ellipse cx="92" cy="148" rx="15" ry="22" fill="rgba(255,255,255,0.30)" transform="rotate(-15 92 148)"/>
+              <!-- Rim light (bottom) -->
+              <ellipse cx="130" cy="272" rx="55" ry="10" fill="rgba(129,199,132,0.18)" filter="url(#fBlur1)"/>
+
+              <!-- ── NECK ── -->
+              <ellipse cx="130" cy="128" rx="36" ry="14" fill="#388E3C"/>
+              <ellipse cx="118" cy="124" rx="14" ry="6" fill="rgba(255,255,255,0.16)"/>
+
+              <!-- ── HEAD ── -->
+              <!-- Shadow -->
+              <ellipse cx="133" cy="96" rx="59" ry="55" fill="rgba(0,0,0,0.12)" filter="url(#fBlur)"/>
+              <!-- Main head sphere -->
+              <ellipse cx="130" cy="92" rx="58" ry="54" fill="url(#hGrad)" filter="url(#fShadow)"/>
+              <!-- Head highlight (soft) -->
+              <ellipse cx="104" cy="68" rx="26" ry="18" fill="rgba(255,255,255,0.20)" transform="rotate(-22 104 68)" filter="url(#fBlur1)"/>
+              <!-- Head specular (sharp) -->
+              <ellipse cx="98" cy="61" rx="12" ry="8" fill="rgba(255,255,255,0.35)" transform="rotate(-22 98 61)"/>
+
+              <!-- ── EYES (cute: smaller sclera, fat iris ratio, soft lids) ── -->
+              <!-- Left eye -->
+              <circle cx="108" cy="91" r="19" fill="rgba(0,0,0,0.12)" filter="url(#fBlur)"/>
+              <circle cx="106" cy="89" r="17" fill="url(#ewL)" filter="url(#fEye)"/>
+              <circle cx="106" cy="89" r="11" fill="url(#irisL)"/>
+              <circle cx="106" cy="89" r="11" fill="none" stroke="rgba(13,71,161,0.5)" stroke-width="1.2"/>
+              <circle class="eye-pupil" cx="106" cy="89" r="6.5" fill="#050510"/>
+              <!-- Glare dots left -->
+              <circle cx="110"  cy="84" r="4"   fill="white" opacity="0.95"/>
+              <circle cx="102"  cy="94" r="2"   fill="white" opacity="0.50"/>
+              <circle cx="113"  cy="87" r="1.2" fill="white" opacity="0.75"/>
+              <!-- Upper eyelid arc (soft lid = cute) -->
+              <path d="M89 84 Q106 76 123 84" stroke="rgba(46,125,50,0.35)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <!-- Eye rim -->
+              <circle cx="106" cy="89" r="17" fill="none" stroke="rgba(46,125,50,0.18)" stroke-width="1.5"/>
+
+              <!-- Right eye -->
+              <circle cx="156" cy="91" r="19" fill="rgba(0,0,0,0.12)" filter="url(#fBlur)"/>
+              <circle cx="154" cy="89" r="17" fill="url(#ewR)" filter="url(#fEye)"/>
+              <circle cx="154" cy="89" r="11" fill="url(#irisR)"/>
+              <circle cx="154" cy="89" r="11" fill="none" stroke="rgba(13,71,161,0.5)" stroke-width="1.2"/>
+              <circle class="eye-pupil" cx="154" cy="89" r="6.5" fill="#050510"/>
+              <!-- Glare dots right -->
+              <circle cx="158"  cy="84" r="4"   fill="white" opacity="0.95"/>
+              <circle cx="150"  cy="94" r="2"   fill="white" opacity="0.50"/>
+              <circle cx="161"  cy="87" r="1.2" fill="white" opacity="0.75"/>
+              <!-- Upper eyelid arc -->
+              <path d="M137 84 Q154 76 171 84" stroke="rgba(46,125,50,0.35)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <!-- Eye rim -->
+              <circle cx="154" cy="89" r="17" fill="none" stroke="rgba(46,125,50,0.18)" stroke-width="1.5"/>
+
+              <!-- ── EYEBROWS (closer to smaller eyes) ── -->
+              <path d="M90 71 Q106 63 120 69" stroke="#1B5E20" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+              <path d="M140 69 Q154 63 170 71" stroke="#1B5E20" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+
+              <!-- ── SMILE ── -->
+              <path d="M106 118 Q130 140 154 118" stroke="#1B5E20" stroke-width="4" stroke-linecap="round" fill="none"/>
+              <path d="M110 120 Q130 136 150 120" stroke="rgba(27,94,32,0.30)" stroke-width="6" stroke-linecap="round" fill="none"/>
+
+              <!-- ── BLUSH (rosy cheeks, below smaller eyes) ── -->
+              <ellipse cx="82"  cy="110" rx="14" ry="9" fill="rgba(255,80,80,0.20)" filter="url(#fBlur1)"/>
+              <ellipse cx="178" cy="110" rx="14" ry="9" fill="rgba(255,80,80,0.20)" filter="url(#fBlur1)"/>
+
+              <!-- ── ANTENNAE ── -->
+              <g id="antenna-left">
+                <path d="M100 47 Q82 25 62 12" stroke="#2E7D32" stroke-width="4" stroke-linecap="round" fill="none"/>
+                <!-- Ball shadow -->
+                <circle cx="61"  cy="10" r="12" fill="rgba(0,0,0,0.14)" filter="url(#fBlur1)"/>
+                <!-- Ball body -->
+                <circle cx="59"  cy="8"  r="11" fill="url(#aGrad)"/>
+                <!-- Ball glare -->
+                <circle cx="55"  cy="3"  r="5"  fill="rgba(255,255,255,0.50)"/>
+                <circle cx="53"  cy="2"  r="2.5" fill="rgba(255,255,255,0.80)"/>
+              </g>
+              <g id="antenna-right">
+                <path d="M160 47 Q178 25 198 12" stroke="#2E7D32" stroke-width="4" stroke-linecap="round" fill="none"/>
+                <circle cx="199" cy="10" r="12" fill="rgba(0,0,0,0.14)" filter="url(#fBlur1)"/>
+                <circle cx="201" cy="8"  r="11" fill="url(#aGrad)"/>
+                <circle cx="196" cy="3"  r="5"  fill="rgba(255,255,255,0.50)"/>
+                <circle cx="194" cy="2"  r="2.5" fill="rgba(255,255,255,0.80)"/>
+              </g>
+            </svg>
+
+            <!-- Orbiting elements -->
+            <div class="orbit-bug orbit-bug-1" title="HTML">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#E44D26"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>
+            </div>
+            <div class="orbit-bug orbit-bug-2" title="JS">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#F7DF1E"><path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/></svg>
+            </div>
+            <div class="orbit-bug orbit-bug-3" title="React">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#61DAFB"><path d="M14.23 12.004a2.236 2.236 0 0 1-2.235 2.236 2.236 2.236 0 0 1-2.236-2.236 2.236 2.236 0 0 1 2.235-2.236 2.236 2.236 0 0 1 2.236 2.236zm2.648-10.69c-1.346 0-3.107.96-4.888 2.622-1.78-1.653-3.542-2.602-4.887-2.602-.41 0-.783.093-1.106.275-1.375.793-1.683 3.264-.973 6.365C1.98 8.917 0 10.42 0 12.004c0 1.59 1.99 3.097 5.043 4.03-.704 3.113-.39 5.588.988 6.38.32.187.69.275 1.102.275 1.345 0 3.107-.96 4.888-2.624 1.78 1.654 3.542 2.603 4.887 2.603.41 0 .783-.09 1.106-.275 1.375-.793 1.683-3.264.973-6.365C22.02 15.096 24 13.59 24 12.004c0-1.59-1.99-3.097-5.043-4.032.704-3.11.39-5.587-.988-6.38a2.167 2.167 0 0 0-1.092-.278zm-.005 1.09c.278 0 .51.06.705.173.994.573 1.17 2.756.556 5.63a32.08 32.08 0 0 0-.205-.045c-.666-.146-1.39-.26-2.154-.336a27.01 27.01 0 0 0-1.384-1.69c.917-.924 1.86-1.712 2.7-2.218.218-.127.434-.19.648-.19.037 0 .073.002.108.004l.026.002zm-11.573.183c.195-.113.427-.17.705-.17.217 0 .43.063.65.188.84.506 1.783 1.294 2.7 2.218a26.74 26.74 0 0 0-1.384 1.69c-.764.076-1.487.19-2.153.336-.07.015-.138.03-.204.045-.615-2.874-.44-5.057.556-5.63zM5.937 12.004c.15.334.313.67.497 1.006a27.42 27.42 0 0 0-.497-1.006zm12.126 0c-.15-.334-.313-.67-.497-1.006.185.336.348.672.497 1.006zM12 7.38c.476.48.953 1.01 1.42 1.59-.95-.048-1.892-.048-2.84 0 .467-.58.944-1.11 1.42-1.59zm0 9.26c-.476-.48-.953-1.014-1.42-1.593.95.048 1.892.048 2.84 0-.467.58-.944 1.113-1.42 1.592zm-2.41-.49c-.386-.14-.75-.294-1.093-.46.33-.17.683-.33 1.053-.476l-.003.015.023-.018.02.94zm4.82 0l.02-.94.023.018-.003-.015c.37.145.723.307 1.053.476-.344.166-.707.32-1.093.46zm-7.254-4.57c-.38.14-.73.3-1.054.47.33-.17.673-.33 1.054-.47zm1.015-1.15c.32-.68.66-1.328 1.01-1.936-.35.607-.69 1.257-1.01 1.935zm5.254 0c-.32-.678-.66-1.328-1.01-1.935.35.608.69 1.257 1.01 1.936zm1.015 1.15c.38.14.724.3 1.054.47-.33-.17-.673-.33-1.054-.47zM8.63 13.56c-.17.35-.33.704-.47 1.054.14-.35.3-.703.47-1.053zm6.74 0c.17.35.33.703.47 1.053-.14-.35-.3-.703-.47-1.053zM12 16.12c-.48-.497-.963-1.03-1.43-1.6.95.05 1.893.05 2.843 0-.466.57-.95 1.103-1.43 1.6zM7.625 9.375c.49.498.98 1.035 1.44 1.6-.95-.05-1.893-.05-2.843 0 .47-.567.95-1.102 1.4-1.6zm8.75 0c.45.5.93 1.033 1.4 1.6-.95-.05-1.893-.05-2.843 0 .46-.565.95-1.102 1.44-1.6z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="scroll-hint">
+      <div class="scroll-mouse"></div>
+      <span>Scroll down</span>
+    </div>
+  </section>
+
+  <!-- ============================================
+       MARQUEE
+  ============================================ -->
+  <div class="marquee-section">
+    <p class="marquee-label">Technologies we love</p>
+    <div class="marquee-track" id="marqueeTrack">
+      <!-- items duplicated for infinite loop -->
+      <span class="marquee-item"><i class="bx bxs-zap"></i> React</span>
+      <span class="marquee-item"><i class="bx bxs-palette"></i> CSS3</span>
+      <span class="marquee-item"><i class="bx bxl-javascript" style="color:#f7df1e"></i> JavaScript</span>
+      <span class="marquee-item"><i class="bx bxl-typescript" style="color:#3178c6"></i> TypeScript</span>
+      <span class="marquee-item"><i class="bx bxl-nodejs" style="color:#339933"></i> Node.js</span>
+      <span class="marquee-item"><i class="bx bxl-postgresql" style="color:#4169e1"></i> PostgreSQL</span>
+      <span class="marquee-item"><i class="bx bxl-mongodb" style="color:#47a248"></i> MongoDB</span>
+      <span class="marquee-item"><i class="bx bxl-aws" style="color:#ff9900"></i> AWS</span>
+      <span class="marquee-item"><i class="bx bx-rocket"></i> Next.js</span>
+      <span class="marquee-item"><i class="bx bxl-figma" style="color:#f24e1e"></i> Figma</span>
+      <span class="marquee-item"><i class="bx bxl-docker" style="color:#2496ed"></i> Docker</span>
+      <span class="marquee-item"><i class="bx bxl-firebase" style="color:#ffca28"></i> Firebase</span>
+      <!-- duplicate -->
+      <span class="marquee-item"><i class="bx bxs-zap"></i> React</span>
+      <span class="marquee-item"><i class="bx bxs-palette"></i> CSS3</span>
+      <span class="marquee-item"><i class="bx bxl-javascript" style="color:#f7df1e"></i> JavaScript</span>
+      <span class="marquee-item"><i class="bx bxl-typescript" style="color:#3178c6"></i> TypeScript</span>
+      <span class="marquee-item"><i class="bx bxl-nodejs" style="color:#339933"></i> Node.js</span>
+      <span class="marquee-item"><i class="bx bxl-postgresql" style="color:#4169e1"></i> PostgreSQL</span>
+      <span class="marquee-item"><i class="bx bxl-mongodb" style="color:#47a248"></i> MongoDB</span>
+      <span class="marquee-item"><i class="bx bxl-aws" style="color:#ff9900"></i> AWS</span>
+      <span class="marquee-item"><i class="bx bx-rocket"></i> Next.js</span>
+      <span class="marquee-item"><i class="bx bxl-figma" style="color:#f24e1e"></i> Figma</span>
+      <span class="marquee-item"><i class="bx bxl-docker" style="color:#2496ed"></i> Docker</span>
+      <span class="marquee-item"><i class="bx bxl-firebase" style="color:#ffca28"></i> Firebase</span>
+    </div>
+  </div>
+
+  <!-- ============================================
+       PROJECTS
+  ============================================ -->
+  <section id="projects" class="section">
+    <div class="container">
+      <div class="projects-header">
+        <div>
+          <div class="section-label reveal"><i class="bx bxs-bug"></i> Our Work</div>
+          <h2 class="section-title reveal reveal-delay-1">Projects we're<br/><span class="text-green">proud to ship</span></h2>
+        </div>
+        <p class="section-subtitle reveal reveal-delay-2">Every project is packed with attention to detail, clean code, and zero bugs. Here's a taste of what we build.</p>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Card 1 - Featured -->
+        <div class="project-card featured reveal" data-delay="0">
+          <div class="project-thumb">
+            <svg class="project-thumb-img" viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg">
+              <rect width="800" height="450" fill="#f0f9f0"/>
+              <rect x="0" y="0" width="200" height="450" fill="#e8f5e9"/>
+              <rect x="20" y="20" width="160" height="30" rx="8" fill="#4CAF50" opacity="0.3"/>
+              <rect x="20" y="60" width="100" height="8" rx="4" fill="#ccc"/>
+              <rect x="20" y="76" width="80" height="8" rx="4" fill="#ddd"/>
+              <rect x="20" y="92" width="120" height="8" rx="4" fill="#ddd"/>
+              <rect x="20" y="120" width="160" height="1" fill="#e0e0e0"/>
+              <rect x="20" y="135" width="140" height="10" rx="5" fill="#4CAF50" opacity="0.6"/>
+              <rect x="20" y="152" width="140" height="10" rx="5" fill="#ddd"/>
+              <rect x="20" y="169" width="140" height="10" rx="5" fill="#ddd"/>
+              <rect x="20" y="186" width="140" height="10" rx="5" fill="#ddd"/>
+              <!-- Main content -->
+              <rect x="220" y="20" width="560" height="60" rx="8" fill="white"/>
+              <circle cx="260" cy="50" r="15" fill="#4CAF50" opacity="0.3"/>
+              <rect x="285" y="42" width="120" height="8" rx="4" fill="#eee"/>
+              <rect x="285" y="56" width="80" height="6" rx="3" fill="#f0f0f0"/>
+              <!-- Cards -->
+              <rect x="220" y="100" width="174" height="160" rx="12" fill="white"/>
+              <rect x="220" y="100" width="174" height="90" rx="12" fill="#e8f5e9"/>
+              <rect x="232" y="200" width="100" height="8" rx="4" fill="#333"/>
+              <rect x="232" y="215" width="74" height="6" rx="3" fill="#aaa"/>
+              <rect x="404" y="100" width="174" height="160" rx="12" fill="white"/>
+              <rect x="404" y="100" width="174" height="90" rx="12" fill="#fff9e6"/>
+              <rect x="416" y="200" width="100" height="8" rx="4" fill="#333"/>
+              <rect x="416" y="215" width="74" height="6" rx="3" fill="#aaa"/>
+              <rect x="588" y="100" width="192" height="160" rx="12" fill="white"/>
+              <rect x="588" y="100" width="192" height="90" rx="12" fill="#e3f2fd"/>
+              <rect x="600" y="200" width="100" height="8" rx="4" fill="#333"/>
+              <rect x="600" y="215" width="74" height="6" rx="3" fill="#aaa"/>
+              <!-- Bottom chart -->
+              <rect x="220" y="276" width="560" height="154" rx="12" fill="white"/>
+              <rect x="240" y="295" width="80" height="10" rx="5" fill="#eee"/>
+              <polyline points="240,380 310,360 380,370 460,330 530,350 610,315 680,320 740,295" stroke="#4CAF50" stroke-width="3" fill="none" stroke-linejoin="round"/>
+              <circle cx="680" cy="320" r="5" fill="#4CAF50"/>
+              <circle cx="530" cy="350" r="5" fill="#4CAF50"/>
+              <circle cx="460" cy="330" r="5" fill="#4CAF50"/>
+            </svg>
+            <div class="project-thumb-overlay">
+              <span class="project-view-btn">View Project →</span>
+            </div>
+            <!-- mini bug -->
+            <svg class="project-bug" viewBox="0 0 32 32" fill="none">
+              <ellipse cx="16" cy="19" rx="9" ry="10" fill="#4CAF50"/>
+              <ellipse cx="16" cy="12" rx="6" ry="5" fill="#388E3C"/>
+              <circle cx="12.5" cy="11.5" r="2.5" fill="white"/><circle cx="19.5" cy="11.5" r="2.5" fill="white"/>
+              <circle cx="13" cy="11.5" r="1.2" fill="#111"/><circle cx="20" cy="11.5" r="1.2" fill="#111"/>
+            </svg>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">React</span>
+              <span class="project-tag">Node.js</span>
+              <span class="project-tag">MongoDB</span>
+            </div>
+            <h3 class="project-name">ShopNest — E-Commerce Platform</h3>
+            <p class="project-desc">A full-stack e-commerce platform with real-time inventory, smart search, and a lightning-fast checkout experience. Built for scale.</p>
+            <div class="project-footer">
+              <div class="project-links">
+                <a href="#" class="project-link" aria-label="GitHub">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+                <a href="#" class="project-link" aria-label="Live demo">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="project-card reveal reveal-delay-1" data-delay="0.1">
+          <div class="project-thumb">
+            <svg class="project-thumb-img" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="225" fill="#111"/>
+              <rect x="12" y="12" width="110" height="201" rx="8" fill="#1a1a1a"/>
+              <rect x="20" y="22" width="94" height="20" rx="6" fill="#4CAF50" opacity="0.4"/>
+              <rect x="20" y="52" width="94" height="8" rx="4" fill="#333"/>
+              <rect x="20" y="66" width="94" height="8" rx="4" fill="#333"/>
+              <rect x="20" y="80" width="94" height="8" rx="4" fill="#4CAF50" opacity="0.6"/>
+              <rect x="20" y="94" width="94" height="8" rx="4" fill="#333"/>
+              <!-- Main area -->
+              <rect x="134" y="12" width="255" height="100" rx="8" fill="#1a1a1a"/>
+              <rect x="148" y="24" width="80" height="12" rx="6" fill="#333"/>
+              <!-- mini bar chart -->
+              <rect x="148" y="65" width="18" height="35" rx="4" fill="#4CAF50" opacity="0.5"/>
+              <rect x="172" y="50" width="18" height="50" rx="4" fill="#4CAF50" opacity="0.8"/>
+              <rect x="196" y="58" width="18" height="42" rx="4" fill="#4CAF50" opacity="0.6"/>
+              <rect x="220" y="40" width="18" height="60" rx="4" fill="#4CAF50"/>
+              <rect x="244" y="52" width="18" height="48" rx="4" fill="#4CAF50" opacity="0.7"/>
+              <rect x="268" y="45" width="18" height="55" rx="4" fill="#4CAF50" opacity="0.9"/>
+              <!-- Stats -->
+              <rect x="134" y="124" width="80" height="89" rx="8" fill="#1a1a1a"/>
+              <rect x="148" y="136" width="50" height="8" rx="4" fill="#555"/>
+              <rect x="148" y="152" width="40" height="18" rx="5" fill="#4CAF50"/>
+              <rect x="226" y="124" width="80" height="89" rx="8" fill="#1a1a1a"/>
+              <rect x="238" y="136" width="50" height="8" rx="4" fill="#555"/>
+              <rect x="238" y="152" width="40" height="18" rx="5" fill="#81C784"/>
+              <rect x="318" y="124" width="71" height="89" rx="8" fill="#1a1a1a"/>
+              <rect x="330" y="136" width="47" height="8" rx="4" fill="#555"/>
+              <rect x="330" y="152" width="40" height="18" rx="5" fill="#388E3C"/>
+            </svg>
+            <div class="project-thumb-overlay">
+              <span class="project-view-btn">View Project →</span>
+            </div>
+            <svg class="project-bug" viewBox="0 0 32 32" fill="none">
+              <ellipse cx="16" cy="19" rx="9" ry="10" fill="#4CAF50"/>
+              <ellipse cx="16" cy="12" rx="6" ry="5" fill="#388E3C"/>
+              <circle cx="12.5" cy="11.5" r="2.5" fill="white"/><circle cx="19.5" cy="11.5" r="2.5" fill="white"/>
+              <circle cx="13" cy="11.5" r="1.2" fill="#111"/><circle cx="20" cy="11.5" r="1.2" fill="#111"/>
+            </svg>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">Next.js</span>
+              <span class="project-tag">TypeScript</span>
+              <span class="project-tag">PostgreSQL</span>
+            </div>
+            <h3 class="project-name">DataPulse — Analytics Dashboard</h3>
+            <p class="project-desc">Real-time analytics dashboard with live charts, custom KPI widgets, and team collaboration features.</p>
+            <div class="project-footer">
+              <div class="project-links">
+                <a href="#" class="project-link" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                <a href="#" class="project-link" aria-label="Live"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="project-card reveal reveal-delay-2">
+          <div class="project-thumb">
+            <svg class="project-thumb-img" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="225" fill="#f8f4ff"/>
+              <rect x="120" y="15" width="160" height="195" rx="24" fill="#fff" stroke="#e0d4f7" stroke-width="2"/>
+              <!-- Status bar -->
+              <rect x="135" y="28" width="130" height="12" rx="6" fill="#f0e8ff"/>
+              <!-- Header -->
+              <rect x="135" y="50" width="90" height="14" rx="7" fill="#7C3AED" opacity="0.2"/>
+              <rect x="135" y="72" width="60" height="10" rx="5" fill="#e0d4f7"/>
+              <!-- Cards -->
+              <rect x="135" y="92" width="130" height="58" rx="12" fill="#f0e8ff"/>
+              <rect x="145" y="102" width="60" height="10" rx="5" fill="#7C3AED" opacity="0.5"/>
+              <rect x="145" y="118" width="40" height="8" rx="4" fill="#ccc"/>
+              <rect x="215" y="100" width="40" height="40" rx="10" fill="#4CAF50" opacity="0.2"/>
+              <text x="231" y="124" font-size="18" text-anchor="middle" fill="#4CAF50">✓</text>
+              <rect x="135" y="158" width="130" height="45" rx="12" fill="#e8f5e9"/>
+              <rect x="145" y="168" width="70" height="9" rx="4" fill="#388E3C" opacity="0.5"/>
+              <rect x="145" y="182" width="50" height="7" rx="3" fill="#ccc"/>
+              <!-- Bottom nav -->
+              <rect x="135" y="186" width="130" height="18" rx="9" fill="#f5f5f5"/>
+            </svg>
+            <div class="project-thumb-overlay">
+              <span class="project-view-btn">View Project →</span>
+            </div>
+            <svg class="project-bug" viewBox="0 0 32 32" fill="none">
+              <ellipse cx="16" cy="19" rx="9" ry="10" fill="#4CAF50"/>
+              <ellipse cx="16" cy="12" rx="6" ry="5" fill="#388E3C"/>
+              <circle cx="12.5" cy="11.5" r="2.5" fill="white"/><circle cx="19.5" cy="11.5" r="2.5" fill="white"/>
+              <circle cx="13" cy="11.5" r="1.2" fill="#111"/><circle cx="20" cy="11.5" r="1.2" fill="#111"/>
+            </svg>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">React Native</span>
+              <span class="project-tag">Firebase</span>
+            </div>
+            <h3 class="project-name">TaskFlow — Mobile App</h3>
+            <p class="project-desc">A beautifully minimal task management app with smart scheduling, team sync, and habit tracking.</p>
+            <div class="project-footer">
+              <div class="project-links">
+                <a href="#" class="project-link" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                <a href="#" class="project-link" aria-label="Live"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="project-card reveal reveal-delay-3">
+          <div class="project-thumb">
+            <svg class="project-thumb-img" viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+              <rect width="400" height="225" fill="#fff9ed"/>
+              <rect x="20" y="20" width="360" height="50" rx="10" fill="white"/>
+              <circle cx="45" cy="45" r="15" fill="#FF9800" opacity="0.3"/>
+              <rect x="68" y="36" width="100" height="9" rx="4" fill="#eee"/>
+              <rect x="68" y="50" width="70" height="7" rx="3" fill="#f0f0f0"/>
+              <rect x="300" y="30" width="65" height="30" rx="8" fill="#4CAF50"/>
+              <!-- Grid items -->
+              <rect x="20" y="84" width="170" height="126" rx="12" fill="white"/>
+              <rect x="20" y="84" width="170" height="70" rx="12" fill="#FFF3E0"/>
+              <rect x="35" y="165" width="100" height="9" rx="4" fill="#555"/>
+              <rect x="35" y="180" width="74" height="7" rx="3" fill="#aaa"/>
+              <rect x="210" y="84" width="170" height="126" rx="12" fill="white"/>
+              <rect x="210" y="84" width="170" height="70" rx="12" fill="#E8F5E9"/>
+              <rect x="225" y="165" width="100" height="9" rx="4" fill="#555"/>
+              <rect x="225" y="180" width="74" height="7" rx="3" fill="#aaa"/>
+            </svg>
+            <div class="project-thumb-overlay">
+              <span class="project-view-btn">View Project →</span>
+            </div>
+            <svg class="project-bug" viewBox="0 0 32 32" fill="none">
+              <ellipse cx="16" cy="19" rx="9" ry="10" fill="#4CAF50"/>
+              <ellipse cx="16" cy="12" rx="6" ry="5" fill="#388E3C"/>
+              <circle cx="12.5" cy="11.5" r="2.5" fill="white"/><circle cx="19.5" cy="11.5" r="2.5" fill="white"/>
+              <circle cx="13" cy="11.5" r="1.2" fill="#111"/><circle cx="20" cy="11.5" r="1.2" fill="#111"/>
+            </svg>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">Vue.js</span>
+              <span class="project-tag">Stripe</span>
+              <span class="project-tag">AWS</span>
+            </div>
+            <h3 class="project-name">FoodBridge — Restaurant Platform</h3>
+            <p class="project-desc">Restaurant discovery and online ordering platform with real-time tracking and Stripe payments.</p>
+            <div class="project-footer">
+              <div class="project-links">
+                <a href="#" class="project-link" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                <a href="#" class="project-link" aria-label="Live"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SKILLS
+  ============================================ -->
+  <section id="skills" class="section">
+    <div class="container">
+      <div class="text-center" style="margin-bottom:56px">
+        <div class="section-label reveal"><i class="bx bxs-cog"></i> Our Expertise</div>
+        <h2 class="section-title reveal reveal-delay-1">Skills that make<br/><span class="text-green">great products</span></h2>
+        <p class="section-subtitle reveal reveal-delay-2">From pixel-perfect frontends to robust backends — we've got the full stack covered.</p>
+      </div>
+      <div class="skills-inner">
+        <!-- Progress bars -->
+        <div class="skills-bars reveal">
+          <div class="skill-item">
+            <div class="skill-label-row">
+              <span class="skill-name">🌐 HTML & CSS</span>
+              <span class="skill-pct">98%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-width="98"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label-row">
+              <span class="skill-name"><i class="bx bxs-zap"></i> JavaScript / TypeScript</span>
+              <span class="skill-pct">95%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-width="95"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label-row">
+              <span class="skill-name">⚛️ React / Next.js</span>
+              <span class="skill-pct">92%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-width="92"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label-row">
+              <span class="skill-name"><i class="bx bxl-nodejs" style="color:#339933"></i> Node.js / Express</span>
+              <span class="skill-pct">88%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-width="88"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label-row">
+              <span class="skill-name"><i class="bx bxl-mongodb" style="color:#47a248"></i> Databases (SQL & NoSQL)</span>
+              <span class="skill-pct">85%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label-row">
+              <span class="skill-name"><i class="bx bxl-aws" style="color:#ff9900"></i> DevOps & Cloud (AWS/Docker)</span>
+              <span class="skill-pct">80%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" data-width="80"></div></div>
+          </div>
+        </div>
+        <!-- Circular indicators -->
+        <div class="skills-circles">
+          <!-- UI/UX Design -->
+          <div class="skill-circle-item reveal reveal-delay-1">
+            <svg class="circle-svg" width="90" height="90" viewBox="0 0 90 90">
+              <circle class="circle-track" cx="45" cy="45" r="36"/>
+              <circle class="circle-fill" cx="45" cy="45" r="36" data-pct="90"/>
+              <text class="circle-text" x="45" y="45">90%</text>
+            </svg>
+            <span class="skill-circle-name">UI/UX Design</span>
+          </div>
+          <!-- Performance -->
+          <div class="skill-circle-item reveal reveal-delay-2">
+            <svg class="circle-svg" width="90" height="90" viewBox="0 0 90 90">
+              <circle class="circle-track" cx="45" cy="45" r="36"/>
+              <circle class="circle-fill" cx="45" cy="45" r="36" data-pct="95"/>
+              <text class="circle-text" x="45" y="45">95%</text>
+            </svg>
+            <span class="skill-circle-name">Performance</span>
+          </div>
+          <!-- SEO -->
+          <div class="skill-circle-item reveal reveal-delay-3">
+            <svg class="circle-svg" width="90" height="90" viewBox="0 0 90 90">
+              <circle class="circle-track" cx="45" cy="45" r="36"/>
+              <circle class="circle-fill" cx="45" cy="45" r="36" data-pct="87"/>
+              <text class="circle-text" x="45" y="45">87%</text>
+            </svg>
+            <span class="skill-circle-name">SEO</span>
+          </div>
+          <!-- Testing -->
+          <div class="skill-circle-item reveal reveal-delay-4">
+            <svg class="circle-svg" width="90" height="90" viewBox="0 0 90 90">
+              <circle class="circle-track" cx="45" cy="45" r="36"/>
+              <circle class="circle-fill" cx="45" cy="45" r="36" data-pct="93"/>
+              <text class="circle-text" x="45" y="45">93%</text>
+            </svg>
+            <span class="skill-circle-name">Testing / QA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       TEAM
+  ============================================ -->
+  <section id="team" class="section">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-label reveal"><i class="bx bxs-group"></i> The Squad</div>
+        <h2 class="section-title reveal reveal-delay-1">Meet the bugs<br/><span class="text-green">behind the magic</span></h2>
+        <p class="section-subtitle reveal reveal-delay-2">Five passionate devs who live, breathe, and (occasionally) dream in code.</p>
+      </div>
+      <div class="team-grid team-grid-5">
+        <!-- Member 1: Pranesh -->
+        <div class="team-card reveal">
+          <div class="team-avatar">
+            <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+              <rect width="88" height="88" rx="44" fill="#E8F5E9"/>
+              <ellipse cx="44" cy="60" rx="24" ry="22" fill="#FFCC80"/>
+              <ellipse cx="44" cy="36" rx="18" ry="18" fill="#FFCC80"/>
+              <ellipse cx="44" cy="34" rx="18" ry="16" fill="#FFB74D"/>
+              <!-- hair -->
+              <ellipse cx="44" cy="22" rx="17" ry="9" fill="#5D4037"/>
+              <rect x="26" y="22" width="5" height="12" rx="2" fill="#5D4037"/>
+              <rect x="57" y="22" width="5" height="12" rx="2" fill="#5D4037"/>
+              <!-- glasses -->
+              <rect x="27" y="35" width="14" height="10" rx="4" fill="none" stroke="#5D4037" stroke-width="2"/>
+              <rect x="47" y="35" width="14" height="10" rx="4" fill="none" stroke="#5D4037" stroke-width="2"/>
+              <line x1="41" y1="40" x2="47" y2="40" stroke="#5D4037" stroke-width="1.5"/>
+              <!-- eyes -->
+              <circle cx="34" cy="40" r="3" fill="#5D4037"/>
+              <circle cx="54" cy="40" r="3" fill="#5D4037"/>
+              <!-- smile -->
+              <path d="M37 50 Q44 57 51 50" stroke="#E65100" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <!-- shirt (green hoodie) -->
+              <rect x="20" y="64" width="48" height="24" rx="8" fill="#4CAF50"/>
+              <ellipse cx="44" cy="64" rx="10" ry="5" fill="#388E3C"/>
+            </svg>
+          </div>
+          <h3 class="team-name">Pranesh</h3>
+          <div class="team-role">Lead Developer</div>
+          <p class="team-tagline">"Turns coffee into clean code <i class="bx bxs-coffee"></i>"</p>
+          <div class="team-socials">
+            <a href="#" class="team-social-link" aria-label="GitHub">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+            <a href="#" class="team-social-link" aria-label="LinkedIn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Member 2 -->
+        <div class="team-card reveal reveal-delay-1">
+          <div class="team-avatar">
+            <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+              <rect width="88" height="88" rx="44" fill="#FCE4EC"/>
+              <ellipse cx="44" cy="60" rx="24" ry="22" fill="#FFCC80"/>
+              <ellipse cx="44" cy="36" rx="18" ry="18" fill="#FFCC80"/>
+              <ellipse cx="44" cy="34" rx="18" ry="16" fill="#FFB74D"/>
+              <!-- curly hair -->
+              <ellipse cx="44" cy="18" rx="19" ry="11" fill="#3E2723"/>
+              <circle cx="28" cy="24" r="7" fill="#3E2723"/>
+              <circle cx="60" cy="24" r="7" fill="#3E2723"/>
+              <!-- eyes -->
+              <circle cx="34" cy="40" r="3.5" fill="#4E342E"/>
+              <circle cx="54" cy="40" r="3.5" fill="#4E342E"/>
+              <circle cx="35.5" cy="38.5" r="1" fill="white"/>
+              <circle cx="55.5" cy="38.5" r="1" fill="white"/>
+              <!-- smile -->
+              <path d="M36 50 Q44 58 52 50" stroke="#E65100" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <!-- shirt -->
+              <rect x="20" y="64" width="48" height="24" rx="8" fill="#F06292"/>
+              <ellipse cx="44" cy="64" rx="10" ry="5" fill="#E91E63"/>
+            </svg>
+          </div>
+          <h3 class="team-name">Seshan</h3>
+          <div class="team-role">UI/UX Designer</div>
+          <p class="team-tagline">"Pixel-perfect or bust <i class="bx bxs-palette"></i>"</p>
+          <div class="team-socials">
+            <a href="#" class="team-social-link" aria-label="GitHub"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+            <a href="#" class="team-social-link" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          </div>
+        </div>
+
+        <!-- Member 3 -->
+        <div class="team-card reveal reveal-delay-2">
+          <div class="team-avatar">
+            <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+              <rect width="88" height="88" rx="44" fill="#E3F2FD"/>
+              <ellipse cx="44" cy="60" rx="24" ry="22" fill="#FFCCBC"/>
+              <ellipse cx="44" cy="36" rx="18" ry="18" fill="#FFCCBC"/>
+              <ellipse cx="44" cy="34" rx="18" ry="16" fill="#FFAB91"/>
+              <!-- hair -->
+              <ellipse cx="44" cy="20" rx="17" ry="10" fill="#1A237E"/>
+              <!-- beard -->
+              <ellipse cx="44" cy="53" rx="12" ry="6" fill="#283593" opacity="0.3"/>
+              <!-- eyes -->
+              <circle cx="36" cy="40" r="3.5" fill="#1A237E"/>
+              <circle cx="52" cy="40" r="3.5" fill="#1A237E"/>
+              <circle cx="37.5" cy="38.5" r="1" fill="white"/>
+              <circle cx="53.5" cy="38.5" r="1" fill="white"/>
+              <!-- smile -->
+              <path d="M36 50 Q44 57 52 50" stroke="#BF360C" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <!-- shirt (navy) -->
+              <rect x="20" y="64" width="48" height="24" rx="8" fill="#1565C0"/>
+              <ellipse cx="44" cy="64" rx="10" ry="5" fill="#0D47A1"/>
+            </svg>
+          </div>
+          <h3 class="team-name">Nitish</h3>
+          <div class="team-role">Backend Engineer</div>
+          <p class="team-tagline">"If it's not tested, it's broken <i class="bx bxs-wrench"></i>"</p>
+          <div class="team-socials">
+            <a href="#" class="team-social-link" aria-label="GitHub"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+            <a href="#" class="team-social-link" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          </div>
+        </div>
+
+        <!-- Member 4 -->
+        <div class="team-card reveal reveal-delay-3">
+          <div class="team-avatar">
+            <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+              <rect width="88" height="88" rx="44" fill="#E8F5E9"/>
+              <ellipse cx="44" cy="60" rx="24" ry="22" fill="#FFE0B2"/>
+              <ellipse cx="44" cy="36" rx="18" ry="18" fill="#FFE0B2"/>
+              <ellipse cx="44" cy="34" rx="18" ry="16" fill="#FFCC80"/>
+              <!-- straight hair -->
+              <rect x="26" y="14" width="36" height="22" rx="4" fill="#4A148C"/>
+              <rect x="24" y="18" width="8" height="28" rx="4" fill="#4A148C"/>
+              <rect x="56" y="18" width="8" height="28" rx="4" fill="#4A148C"/>
+              <!-- eyes -->
+              <circle cx="36" cy="39" r="3.5" fill="#4A148C"/>
+              <circle cx="52" cy="39" r="3.5" fill="#4A148C"/>
+              <circle cx="37.5" cy="37.5" r="1.2" fill="white"/>
+              <circle cx="53.5" cy="37.5" r="1.2" fill="white"/>
+              <!-- smile -->
+              <path d="M36 50 Q44 58 52 50" stroke="#E65100" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <!-- shirt (green) -->
+              <rect x="20" y="64" width="48" height="24" rx="8" fill="#4CAF50"/>
+              <ellipse cx="44" cy="64" rx="10" ry="5" fill="#388E3C"/>
+            </svg>
+          </div>
+          <h3 class="team-name">Subitha</h3>
+          <div class="team-role">Full-Stack Developer</div>
+          <p class="team-tagline">"Making the web a bug-free zone <i class="bx bxs-bug"></i>"</p>
+          <div class="team-socials">
+            <a href="#" class="team-social-link" aria-label="GitHub"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+            <a href="#" class="team-social-link" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          </div>
+        </div>
+
+        <!-- Member 5: Pavithra -->
+        <div class="team-card reveal reveal-delay-4">
+          <div class="team-avatar">
+            <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+              <rect width="88" height="88" rx="44" fill="#E8F5E9"/>
+              <ellipse cx="44" cy="60" rx="24" ry="22" fill="#FFCCBC"/>
+              <ellipse cx="44" cy="36" rx="18" ry="18" fill="#FFCCBC"/>
+              <ellipse cx="44" cy="34" rx="18" ry="16" fill="#FFAB91"/>
+              <!-- long wavy hair -->
+              <ellipse cx="44" cy="19" rx="19" ry="11" fill="#212121"/>
+              <rect x="25" y="22" width="6" height="30" rx="3" fill="#212121"/>
+              <rect x="57" y="22" width="6" height="30" rx="3" fill="#212121"/>
+              <ellipse cx="44" cy="52" rx="16" ry="5" fill="#212121" opacity="0.2"/>
+              <!-- eyes -->
+              <circle cx="36" cy="39" r="3.5" fill="#212121"/>
+              <circle cx="52" cy="39" r="3.5" fill="#212121"/>
+              <circle cx="37.5" cy="37.5" r="1.2" fill="white"/>
+              <circle cx="53.5" cy="37.5" r="1.2" fill="white"/>
+              <!-- smile -->
+              <path d="M36 50 Q44 58 52 50" stroke="#E65100" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <!-- shirt (teal) -->
+              <rect x="20" y="64" width="48" height="24" rx="8" fill="#00897B"/>
+              <ellipse cx="44" cy="64" rx="10" ry="5" fill="#00695C"/>
+            </svg>
+          </div>
+          <h3 class="team-name">Pavithra</h3>
+          <div class="team-role">Frontend Developer</div>
+          <p class="team-tagline">"Code is art, bugs are glitches <i class="bx bxs-star"></i>"</p>
+          <div class="team-socials">
+            <a href="#" class="team-social-link" aria-label="GitHub"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+            <a href="#" class="team-social-link" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PROCESS
+  ============================================ -->
+  <section id="process" class="section">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-label reveal"><i class="bx bx-repost"></i> How We Work</div>
+        <h2 class="section-title reveal reveal-delay-1">Our bug-free<br/><span class="text-green">process</span></h2>
+        <p class="section-subtitle reveal reveal-delay-2">A battle-tested process that delivers consistent, high-quality results every time.</p>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <div class="step-num-wrap">
+            <div class="step-num"><span class="step-num-digit">01</span></div>
+          </div>
+          <div class="step-content">
+            <span class="step-tag">Phase 1</span>
+            <h3 class="step-title">Discover</h3>
+            <p class="step-desc">We dig deep into your vision, goals, and audience. Every great product starts with fully understanding the problem — we ask the right questions before writing a single line of code.</p>
+          </div>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <div class="step-num-wrap">
+            <div class="step-num"><span class="step-num-digit">02</span></div>
+          </div>
+          <div class="step-content">
+            <span class="step-tag">Phase 2</span>
+            <h3 class="step-title">Design</h3>
+            <p class="step-desc">Clean wireframes, gorgeous UI mockups, and interactive prototypes — designed to impress and convert. We sweat the details so your users don't have to think twice.</p>
+          </div>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <div class="step-num-wrap">
+            <div class="step-num"><span class="step-num-digit">03</span></div>
+          </div>
+          <div class="step-content">
+            <span class="step-tag">Phase 3</span>
+            <h3 class="step-title">Build</h3>
+            <p class="step-desc">We write clean, scalable, and maintainable code. Because great code is invisible — it just works. Performance-first, accessible by default, and tested at every step.</p>
+          </div>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <div class="step-num-wrap">
+            <div class="step-num"><span class="step-num-digit">04</span></div>
+          </div>
+          <div class="step-content">
+            <span class="step-tag">Phase 4</span>
+            <h3 class="step-title">Launch</h3>
+            <p class="step-desc">Thorough testing, smooth deployment, and ongoing support. We don't ship bugs — we squash them. Your launch is just the beginning of our partnership.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CONTACT
+  ============================================ -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="contact-inner">
+        <!-- Left info -->
+        <div class="contact-info">
+          <div class="section-label reveal"><i class="bx bxs-envelope"></i> Contact Us</div>
+          <h2 class="section-title reveal reveal-delay-1">Got a project?<br/><span class="text-green">Let's squash<br/>bugs together.</span></h2>
+          <p class="section-subtitle reveal reveal-delay-2">Drop us a message and we'll get back to you faster than a bug crawls into production code.</p>
+          <div class="contact-info-items reveal reveal-delay-3">
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="bx bxs-paper-plane"></i></div>
+              <div class="contact-info-text">
+                <div class="contact-info-label">Email</div>
+                <div class="contact-info-value"><a href="mailto:wildbugs2026@gmail.com" style="color:inherit">wildbugs2026@gmail.com</a></div>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="bx bxs-map"></i></div>
+              <div class="contact-info-text">
+                <div class="contact-info-label">Location</div>
+                <div class="contact-info-value">Remote — Working worldwide</div>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="bx bxs-time"></i></div>
+              <div class="contact-info-text">
+                <div class="contact-info-label">Response Time</div>
+                <div class="contact-info-value">Within 24 hours, guaranteed</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right form -->
+        <div class="contact-form-wrap reveal reveal-delay-2">
+          <!-- Form -->
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="name">Your Name</label>
+                <input id="name" type="text" class="form-control" placeholder="Arjun Sharma" required/>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">Email Address</label>
+                <input id="email" type="email" class="form-control" placeholder="you@example.com" required/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="subject">Subject</label>
+              <input id="subject" type="text" class="form-control" placeholder="Let's build something awesome!" required/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="message">Message</label>
+              <textarea id="message" class="form-control" placeholder="Tell us about your project, timeline, and budget..." required></textarea>
+            </div>
+            <button id="sendBtn" type="submit" class="btn btn-primary btn-send">
+              <span class="btn-send-text">Send Message <i class="bx bx-rocket"></i></span>
+              <span class="bug-sender"><i class="bx bxs-bug"></i></span>
+            </button>
+          </form>
+          <!-- Success state -->
+          <div class="form-success" id="formSuccess">
+            <span class="form-success-icon"><i class="bx bxs-bug"></i></span>
+            <h3 class="form-success-title">Message delivered!</h3>
+            <p class="form-success-sub">Our bug carried it safely. We'll get back to you within 24 hours.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       FOOTER
+  ============================================ -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="wildbugs-logo.png" alt="Wild Bugs Logo" class="footer-logo-img" />
+            Wild Bugs
+          </div>
+          <p class="footer-desc">A passionate web dev team building clean, powerful, and bug-free digital experiences.</p>
+          <div class="footer-socials">
+            <a href="#" class="footer-social" aria-label="GitHub"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+            <a href="#" class="footer-social" aria-label="Twitter"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="#" class="footer-social" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="#" class="footer-social" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Navigation</div>
+          <div class="footer-links">
+            <a href="#hero" class="footer-link">Home</a>
+            <a href="#projects" class="footer-link">Projects</a>
+            <a href="#skills" class="footer-link">Skills</a>
+            <a href="#team" class="footer-link">Team</a>
+            <a href="#contact" class="footer-link">Contact</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Services</div>
+          <div class="footer-links">
+            <a href="#" class="footer-link">Web Development</a>
+            <a href="#" class="footer-link">UI/UX Design</a>
+            <a href="#" class="footer-link">Mobile Apps</a>
+            <a href="#" class="footer-link">API Development</a>
+            <a href="#" class="footer-link">Code Review</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Company</div>
+          <div class="footer-links">
+            <a href="#" class="footer-link">About Us</a>
+            <a href="#" class="footer-link">Blog</a>
+            <a href="#" class="footer-link">Careers</a>
+            <a href="#" class="footer-link">Privacy Policy</a>
+            <a href="#" class="footer-link">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Wild Bugs. All rights reserved. Made with <i class="bx bxs-bug"></i> and <i class="bx bxs-coffee"></i></span>
+        <div class="footer-bottom-right">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Sitemap</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+  <script src="animations.js"></script>
+</body>
+</html>
