@@ -34,11 +34,11 @@
   }
   tick();
 
-  // Scale up on interactive elements
+  // Scale up subtly on interactive elements
   const interactiveEls = document.querySelectorAll('a, button, .project-card, .team-card, .skill-circle-item, .btn');
   interactiveEls.forEach(el => {
     el.addEventListener('mouseenter', () => {
-      ring.style.transform = 'translate(-50%, -50%) scale(2)';
+      ring.style.transform = 'translate(-50%, -50%) scale(1.4)';
       ring.style.borderColor = 'rgba(76,175,80,0.8)';
       dot.style.transform = 'translate(-50%, -50%) scale(0.5)';
     });

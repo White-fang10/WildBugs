@@ -60,45 +60,9 @@ let lenisInstance = null;
 
 
 /* ─────────────────────────────────────────────
-   3. CURSOR LABEL — "View" on project cards
+   3. CURSOR LABEL — Disabled to keep cursor sleek & unobtrusive
 ───────────────────────────────────────────── */
-(function initCursorLabel() {
-  const ring  = document.getElementById('cursorRing');
-  const label = document.getElementById('cursorLabel');
-  if (!ring || !label) return;
 
-  // Track cursor position for label
-  document.addEventListener('mousemove', (e) => {
-    label.style.left = e.clientX + 'px';
-    label.style.top  = e.clientY + 'px';
-  });
-
-  // Project cards → "View"
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      ring.classList.add('cursor-view');
-      label.textContent = 'View';
-      label.style.opacity = '1';
-    });
-    card.addEventListener('mouseleave', () => {
-      ring.classList.remove('cursor-view');
-      label.style.opacity = '0';
-    });
-  });
-
-  // Team cards → "✦"
-  document.querySelectorAll('.team-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      ring.classList.add('cursor-open');
-      label.textContent = '✦';
-      label.style.opacity = '1';
-    });
-    card.addEventListener('mouseleave', () => {
-      ring.classList.remove('cursor-open');
-      label.style.opacity = '0';
-    });
-  });
-})();
 
 
 /* ─────────────────────────────────────────────

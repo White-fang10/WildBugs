@@ -107,19 +107,8 @@ body::after {
   text-transform: uppercase;
   white-space: nowrap;
 }
-#cursorRing.cursor-view {
-  width: 70px !important;
-  height: 70px !important;
-  background: rgba(76,175,80,0.85) !important;
-  border-color: transparent !important;
-  mix-blend-mode: normal;
-}
-#cursorRing.cursor-open {
-  width: 56px !important;
-  height: 56px !important;
-  background: rgba(17,17,17,0.8) !important;
-  border-color: transparent !important;
-}
+/* Disabled cursor view/open ring enlarge */
+
 
 /* ─────────────────────────────────────────────
    WORD-SPLIT HERO ANIMATION
