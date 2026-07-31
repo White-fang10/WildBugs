@@ -787,9 +787,9 @@ document.addEventListener('keydown', (e) => {
   }, { passive: true });
 })();
 
-
 /* ─────────────────────────────────────────────
    28. GITHUB PROJECTS FETCHING
+   — Reads "Hosted URL : <url>" from each README
 ───────────────────────────────────────────── */
 (async function initGitHubProjects() {
   const grid = document.getElementById('projectsGrid');
@@ -798,16 +798,27 @@ document.addEventListener('keydown', (e) => {
   if (!grid) return;
 
   const ORG_NAME = 'WILD-BUGS';
-  
+
+  /** Extract "Hosted URL : https://..." from base64-encoded README content */
+  function extractHostedUrl(base64Content) {
+    try {
+      const text = atob(base64Content.replace(/\n/g, ''));
+      const match = text.match(/Hosted\s+URL\s*[:\-]\s*(https?:\/\/[^\s\)\]]+)/i);
+      return match ? match[1].trim() : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
   try {
     const res = await fetch(`https://api.github.com/orgs/${ORG_NAME}/repos?sort=updated&per_page=100`);
-    if (!res.ok) throw new Error('Failed to fetch projects');
+    if (!res.ok) throw new Error('Failed to fetch repos');
     const repos = await res.json();
-    
+
     const validRepos = repos.filter(r => !r.fork);
-    
+
     grid.innerHTML = '';
-    
+
     if (validRepos.length > 4) {
       grid.classList.add('collapsed');
       if (btnContainer) btnContainer.style.display = 'block';
@@ -815,28 +826,47 @@ document.addEventListener('keydown', (e) => {
       if (btnContainer) btnContainer.style.display = 'none';
     }
 
+    // Fetch all READMEs in parallel
+    const readmeResults = await Promise.allSettled(
+      validRepos.map(repo =>
+        fetch(`https://api.github.com/repos/${ORG_NAME}/${repo.name}/readme`)
+          .then(r => r.ok ? r.json() : null)
+          .catch(() => null)
+      )
+    );
+
     for (let i = 0; i < validRepos.length; i++) {
       const repo = validRepos[i];
       const isFeatured = i === 0;
-      
+
+      // Extract hosted URL from README
+      let hostedUrl = repo.homepage || null;
+      const readmeData = readmeResults[i].status === 'fulfilled' ? readmeResults[i].value : null;
+      if (readmeData && readmeData.content) {
+        const extracted = extractHostedUrl(readmeData.content);
+        if (extracted) hostedUrl = extracted;
+      }
+
       const card = document.createElement('div');
       card.className = `project-card ${isFeatured ? 'featured ' : ''}reveal visible`;
       card.dataset.delay = (i * 0.1).toString();
-      
+
       const coverUrl = `https://raw.githubusercontent.com/${ORG_NAME}/${repo.name}/main/cover.jpg`;
       const fallbackUrl = `https://raw.githubusercontent.com/${ORG_NAME}/${repo.name}/main/cover.png`;
       const defaultImg = 'coverpics/astroid.png';
-      
-      const tagsHtml = (repo.topics || []).slice(0,3).map(t => `<span class="project-tag">${t}</span>`).join('');
+
+      const tagsHtml = (repo.topics || []).slice(0, 3).map(t => `<span class="project-tag">${t}</span>`).join('');
       const langHtml = repo.language ? `<span class="project-tag">${repo.language}</span>` : '';
-      
-      const liveLink = repo.homepage ? `
-        <a href="${repo.homepage}" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Live demo">
+
+      const liveLink = hostedUrl ? `
+        <a href="${hostedUrl}" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Live demo">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         </a>` : '';
 
+      const thumbHref = hostedUrl || repo.html_url;
+
       card.innerHTML = `
-        <a href="${repo.homepage || repo.html_url}" target="_blank" rel="noopener noreferrer" class="project-thumb">
+        <a href="${thumbHref}" target="_blank" rel="noopener noreferrer" class="project-thumb">
           <img class="project-thumb-img" src="${coverUrl}" onerror="this.onerror=null; this.src='${fallbackUrl}'; this.onerror=function(){this.src='${defaultImg}'};" alt="${repo.name}" loading="lazy" />
           <div class="project-thumb-overlay">
             <span class="project-view-btn">View Project →</span>
@@ -866,11 +896,11 @@ document.addEventListener('keydown', (e) => {
       `;
       grid.appendChild(card);
     }
-    
+
     if (typeof window.initCardTilt === 'function') {
-        window.initCardTilt();
+      window.initCardTilt();
     }
-    
+
     if (btn) {
       btn.addEventListener('click', () => {
         const isCollapsed = grid.classList.contains('collapsed');
@@ -884,9 +914,8 @@ document.addEventListener('keydown', (e) => {
           grid.classList.remove('expanded');
           btn.classList.remove('expanded');
           btn.querySelector('span').textContent = 'Show More';
-          
           const target = document.querySelector('#projects');
-          if(target) {
+          if (target) {
             const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 72;
             const top = target.getBoundingClientRect().top + window.scrollY - navH;
             window.scrollTo({ top, behavior: 'smooth' });
@@ -894,10 +923,9 @@ document.addEventListener('keydown', (e) => {
         }
       });
     }
-    
-  } catch(e) {
+
+  } catch (e) {
     console.error('Error loading projects:', e);
     grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Failed to load projects from GitHub.</p>';
   }
 })();
-
