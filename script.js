@@ -404,7 +404,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 /* ─────────────────────────────────────────────
    14. PROJECT CARDS — smooth 3D tilt (RAF-throttled)
 ───────────────────────────────────────────── */
-(function initCardTilt() {
+window.initCardTilt = function() {
   const cards = document.querySelectorAll('.project-card');
 
   cards.forEach(card => {
@@ -463,7 +463,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       if (!rafId) rafId = requestAnimationFrame(animate);
     });
   });
-})();
+};
+window.initCardTilt();
 
 
 /* ─────────────────────────────────────────────
@@ -784,4 +785,132 @@ document.addEventListener('keydown', (e) => {
     }
     hint.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
   }, { passive: true });
+})();
+
+/* ---------------------------------------------
+   28. GITHUB PROJECTS FETCHING
+--------------------------------------------- */
+(async function initGitHubProjects() {
+  const grid = document.getElementById('projectsGrid');
+  const btnContainer = document.getElementById('showMoreContainer');
+  const btn = document.getElementById('showMoreBtn');
+  if (!grid) return;
+
+  const ORG_NAME = 'WILD-BUGS';
+  
+  try {
+    const res = await fetch('https://api.github.com/orgs/' + ORG_NAME + '/repos?sort=updated&per_page=100');
+    if (!res.ok) throw new Error('Failed to fetch projects');
+    const repos = await res.json();
+    
+    // Filter out forks or empty repos if desired
+    const validRepos = repos.filter(r => !r.fork);
+    
+    grid.innerHTML = '';
+    
+    // Default to collapsed state if more than 4 projects
+    if (validRepos.length > 4) {
+      grid.classList.add('collapsed');
+      if (btnContainer) btnContainer.style.display = 'block';
+    } else {
+      if (btnContainer) btnContainer.style.display = 'none';
+    }
+
+    for (let i = 0; i < validRepos.length; i++) {
+      const repo = validRepos[i];
+      const isFeatured = i === 0;
+      
+      const card = document.createElement('div');
+      card.className = \project-card \reveal\;
+      card.dataset.delay = (i * 0.1).toString();
+      
+      const coverUrl = \https://raw.githubusercontent.com/\/\/main/cover.jpg\;
+      const fallbackUrl = \https://raw.githubusercontent.com/\/\/main/cover.png\;
+      const defaultImg = 'coverpics/astroid.png';
+      
+      const tagsHtml = (repo.topics || []).slice(0,3).map(t => \<span class="project-tag">\</span>\).join('');
+      const langHtml = repo.language ? \<span class="project-tag">\</span>\ : '';
+      
+      const liveLink = repo.homepage ? \
+        <a href="\" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Live demo">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>\ : '';
+
+      card.innerHTML = \
+        <a href="\" target="_blank" rel="noopener noreferrer" class="project-thumb">
+          <img class="project-thumb-img" src="\" onerror="this.onerror=null; this.src='\'; this.onerror=function(){this.src='\'};" alt="\" loading="lazy" />
+          <div class="project-thumb-overlay">
+            <span class="project-view-btn">View Project ?</span>
+          </div>
+          <svg class="project-bug" viewBox="0 0 32 32" fill="none">
+            <ellipse cx="16" cy="19" rx="9" ry="10" fill="#4CAF50"/>
+            <ellipse cx="16" cy="12" rx="6" ry="5" fill="#388E3C"/>
+            <circle cx="12.5" cy="11.5" r="2.5" fill="white"/><circle cx="19.5" cy="11.5" r="2.5" fill="white"/>
+            <circle cx="13" cy="11.5" r="1.2" fill="#111"/><circle cx="20" cy="11.5" r="1.2" fill="#111"/>
+          </svg>
+        </a>
+        <div class="project-body">
+          <div class="project-tags">
+            \
+          </div>
+          <h3 class="project-name">\</h3>
+          <p class="project-desc">\</p>
+          <div class="project-footer">
+            <div class="project-links">
+              <a href="\" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+              \
+            </div>
+          </div>
+        </div>
+      \;
+      grid.appendChild(card);
+    }
+    
+    if (typeof window.initCardTilt === 'function') {
+        window.initCardTilt();
+    }
+    
+    // Add scroll reveal for new dynamic elements
+    const newReveals = document.querySelectorAll('.project-card.reveal:not(.visible)');
+    if (newReveals.length) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+      newReveals.forEach(el => observer.observe(el));
+    }
+
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const isCollapsed = grid.classList.contains('collapsed');
+        if (isCollapsed) {
+          grid.classList.remove('collapsed');
+          grid.classList.add('expanded');
+          btn.classList.add('expanded');
+          btn.querySelector('span').textContent = 'Show Less';
+        } else {
+          grid.classList.add('collapsed');
+          grid.classList.remove('expanded');
+          btn.classList.remove('expanded');
+          btn.querySelector('span').textContent = 'Show More';
+          
+          const target = document.querySelector('#projects');
+          if(target) {
+            const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 72;
+            const top = target.getBoundingClientRect().top + window.scrollY - navH;
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+        }
+      });
+    }
+    
+  } catch(e) {
+    console.error('Error loading projects:', e);
+    grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Failed to load projects from GitHub.</p>';
+  }
 })();

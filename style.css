@@ -603,6 +603,24 @@ input, textarea { font-family: inherit; }
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
 }
+.projects-grid.collapsed .project-card:nth-child(n+5) {
+  display: none;
+}
+.btn-show-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: var(--radius-full);
+}
+.btn-show-more i {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+.btn-show-more.expanded i {
+  transform: rotate(180deg);
+}
 .project-card {
   border-radius: var(--radius-lg);
   background: var(--neu-bg);
