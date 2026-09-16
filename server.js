@@ -1,0 +1,172 @@
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+const PORT = 3000;
+
+// Serve static assets from project root
+app.use(express.static(__dirname));
+
+const FALLBACK_PROJECTS = [
+  {
+    name: "Anvil.pr",
+    displayName: "Anvil.pr",
+    description: "Anvil.pr is a prompt version evaluator project designed for evaluating, comparing, and optimizing LLM prompts.",
+    homepage: "https://anvil-pr-five.vercel.app/",
+    hostedUrl: "https://anvil-pr-five.vercel.app/",
+    html_url: "https://github.com/WILD-BUGS/Anvil.pr",
+    language: "TypeScript",
+    topics: ["prompt-engineering", "evaluation", "react", "typescript"],
+    branch: "main",
+    coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/Anvil.pr/main/cover.png",
+    fallbackUrl: "/default-cover.svg"
+  },
+  {
+    name: "Dynamic-Astroid-page-for-special-ones-",
+    displayName: "Dynamic Astroid Page",
+    description: "Interactive front-end asteroid experience designed with dynamic canvas graphics and fluid animations.",
+    homepage: "https://astroid-page-b7so.vercel.app/",
+    hostedUrl: "https://astroid-page-b7so.vercel.app/",
+    html_url: "https://github.com/WILD-BUGS/Dynamic-Astroid-page-for-special-ones-",
+    language: "JavaScript",
+    topics: ["animation", "canvas", "interactive", "space"],
+    branch: "main",
+    coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/Dynamic-Astroid-page-for-special-ones-/main/cover.png",
+    fallbackUrl: "/default-cover.svg"
+  },
+  {
+    name: "WOMENS-WORLD",
+    displayName: "Women's World",
+    description: "Community platform and web portal built to connect and empower women creators and entrepreneurs.",
+    homepage: null,
+    hostedUrl: null,
+    html_url: "https://github.com/WILD-BUGS/WOMENS-WORLD",
+    language: "TypeScript",
+    topics: ["community", "web-platform", "typescript"],
+    branch: "main",
+    coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/WOMENS-WORLD/main/cover.png",
+    fallbackUrl: "/default-cover.svg"
+  },
+  {
+    name: "LogicalLords-LandingPage",
+    displayName: "Logical Lords Landing Page",
+    description: "Clean, high-performance agency landing page with responsive layouts, modern typography, and smooth UX.",
+    homepage: null,
+    hostedUrl: null,
+    html_url: "https://github.com/WILD-BUGS/LogicalLords-LandingPage",
+    language: "TypeScript",
+    topics: ["landing-page", "design", "portfolio"],
+    branch: "main",
+    coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/LogicalLords-LandingPage/main/cover.png",
+    fallbackUrl: "https://raw.githubusercontent.com/WILD-BUGS/LogicalLords-LandingPage/main/banner.png"
+  },
+  {
+    name: "Vighnesh-portfolio",
+    displayName: "Vighnesh Portfolio",
+    description: "Personal developer portfolio and creative showcase highlighting full-stack projects and modern frontend craft.",
+    homepage: null,
+    hostedUrl: null,
+    html_url: "https://github.com/WILD-BUGS/Vighnesh-portfolio",
+    language: "TypeScript",
+    topics: ["portfolio", "creative", "frontend"],
+    branch: "main",
+    coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/Vighnesh-portfolio/main/cover.png",
+    fallbackUrl: "https://raw.githubusercontent.com/WILD-BUGS/Vighnesh-portfolio/main/src/assets/images/project_api_vault_1788237967850.jpg"
+  }
+];
+
+let cachedProjects = null;
+let lastFetchTime = 0;
+const CACHE_DURATION = 1000 * 60 * 30; // 30 minutes
+
+async function fetchFromGitHub() {
+  const ORG_NAME = 'WILD-BUGS';
+  const headers = { 'User-Agent': 'WildBugs-Portfolio/1.0' };
+  if (process.env.GITHUB_TOKEN) {
+    headers['Authorization'] = `Bearer ${process.env.GITHUB_TOKEN}`;
+  }
+
+  const res = await fetch(`https://api.github.com/orgs/${ORG_NAME}/repos?sort=updated&per_page=100`, { headers });
+  if (!res.ok) {
+    throw new Error(`GitHub API returned status ${res.status}`);
+  }
+  const repos = await res.json();
+  const validRepos = Array.isArray(repos) ? repos.filter(r => !r.fork) : [];
+
+  const results = await Promise.allSettled(
+    validRepos.map(async (repo) => {
+      let hostedUrl = repo.homepage || null;
+      try {
+        const readmeRes = await fetch(`https://api.github.com/repos/${ORG_NAME}/${repo.name}/readme`, { headers });
+        if (readmeRes.ok) {
+          const readmeData = await readmeRes.json();
+          if (readmeData.content) {
+            const text = Buffer.from(readmeData.content, 'base64').toString('utf-8');
+            const match = text.match(/Hosted\s+URL\s*[:\-]\s*(https?:\/\/[^\s\)\]]+)/i);
+            if (match) hostedUrl = match[1].trim();
+          }
+        }
+      } catch {}
+
+      const branch = repo.default_branch || 'main';
+      // Primary cover image is always cover.png in the project repo
+      const coverUrl = `https://raw.githubusercontent.com/${ORG_NAME}/${repo.name}/${branch}/cover.png`;
+      let fallbackUrl = '/default-cover.svg';
+
+      if (repo.name.toLowerCase().includes('logicallords')) {
+        fallbackUrl = `https://raw.githubusercontent.com/${ORG_NAME}/${repo.name}/${branch}/banner.png`;
+      } else if (repo.name.toLowerCase().includes('vighnesh')) {
+        fallbackUrl = `https://raw.githubusercontent.com/${ORG_NAME}/${repo.name}/${branch}/src/assets/images/project_api_vault_1788237967850.jpg`;
+      }
+
+      return {
+        name: repo.name,
+        displayName: repo.name.replace(/-/g, ' '),
+        description: repo.description || 'A brilliant project by WILD-BUGS team.',
+        homepage: repo.homepage,
+        hostedUrl,
+        html_url: repo.html_url,
+        language: repo.language,
+        topics: repo.topics || [],
+        branch,
+        coverUrl,
+        fallbackUrl
+      };
+    })
+  );
+
+  return results.filter(r => r.status === 'fulfilled').map(r => r.value);
+}
+
+app.get('/api/projects', async (req, res) => {
+  const now = Date.now();
+  if (cachedProjects && (now - lastFetchTime < CACHE_DURATION)) {
+    return res.json({ success: true, source: 'cache', projects: cachedProjects });
+  }
+
+  try {
+    const liveProjects = await fetchFromGitHub();
+    if (liveProjects && liveProjects.length > 0) {
+      cachedProjects = liveProjects;
+      lastFetchTime = now;
+      return res.json({ success: true, source: 'github', projects: liveProjects });
+    }
+  } catch (err) {
+    console.warn('GitHub API fetch failed or rate-limited, serving fallback projects:', err.message);
+  }
+
+  return res.json({ success: true, source: 'fallback', projects: FALLBACK_PROJECTS });
+});
+
+// Fallback to index.html for SPA/client routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on http://0.0.0.0:${PORT}`);
+});

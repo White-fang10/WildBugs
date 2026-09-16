@@ -798,76 +798,131 @@ document.addEventListener('keydown', (e) => {
   if (!grid) return;
 
   const ORG_NAME = 'WILD-BUGS';
+  const DEFAULT_COVER = '/default-cover.svg';
 
-  /** Extract "Hosted URL : https://..." from base64-encoded README content */
-  function extractHostedUrl(base64Content) {
-    try {
-      const text = atob(base64Content.replace(/\n/g, ''));
-      const match = text.match(/Hosted\s+URL\s*[:\-]\s*(https?:\/\/[^\s\)\]]+)/i);
-      return match ? match[1].trim() : null;
-    } catch (e) {
-      return null;
+  window.handleCoverError = function(img, fallbackUrl, repoName, branch) {
+    if (!img.dataset.step) img.dataset.step = '1';
+    const step = img.dataset.step;
+
+    if (step === '1') {
+      img.dataset.step = '2';
+      if (fallbackUrl && fallbackUrl !== img.src && fallbackUrl !== DEFAULT_COVER) {
+        img.src = fallbackUrl;
+        return;
+      }
     }
-  }
 
-  try {
-    const res = await fetch(`https://api.github.com/orgs/${ORG_NAME}/repos?sort=updated&per_page=100`);
-    if (!res.ok) throw new Error('Failed to fetch repos');
-    const repos = await res.json();
+    if (step === '1' || step === '2') {
+      img.dataset.step = '3';
+      if (branch && branch !== 'master') {
+        img.src = `https://raw.githubusercontent.com/${ORG_NAME}/${repoName}/master/cover.png`;
+        return;
+      }
+    }
 
-    const validRepos = repos.filter(r => !r.fork);
+    img.onerror = null;
+    img.src = DEFAULT_COVER;
+  };
 
+  const FALLBACK_PROJECTS = [
+    {
+      name: "Anvil.pr",
+      displayName: "Anvil.pr",
+      description: "Anvil.pr is a prompt version evaluator project designed for evaluating, comparing, and optimizing LLM prompts.",
+      hostedUrl: "https://anvil-pr-five.vercel.app/",
+      html_url: "https://github.com/WILD-BUGS/Anvil.pr",
+      language: "TypeScript",
+      topics: ["prompt-engineering", "evaluation", "react", "typescript"],
+      branch: "main",
+      coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/Anvil.pr/main/cover.png",
+      fallbackUrl: DEFAULT_COVER
+    },
+    {
+      name: "Dynamic-Astroid-page-for-special-ones-",
+      displayName: "Dynamic Astroid Page",
+      description: "Interactive front-end asteroid experience designed with dynamic canvas graphics and fluid animations.",
+      hostedUrl: "https://astroid-page-b7so.vercel.app/",
+      html_url: "https://github.com/WILD-BUGS/Dynamic-Astroid-page-for-special-ones-",
+      language: "JavaScript",
+      topics: ["animation", "canvas", "interactive", "space"],
+      branch: "main",
+      coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/Dynamic-Astroid-page-for-special-ones-/main/cover.png",
+      fallbackUrl: DEFAULT_COVER
+    },
+    {
+      name: "WOMENS-WORLD",
+      displayName: "Women's World",
+      description: "Community platform and web portal built to connect and empower women creators and entrepreneurs.",
+      hostedUrl: null,
+      html_url: "https://github.com/WILD-BUGS/WOMENS-WORLD",
+      language: "TypeScript",
+      topics: ["community", "web-platform", "typescript"],
+      branch: "main",
+      coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/WOMENS-WORLD/main/cover.png",
+      fallbackUrl: DEFAULT_COVER
+    },
+    {
+      name: "LogicalLords-LandingPage",
+      displayName: "Logical Lords Landing Page",
+      description: "Clean, high-performance agency landing page with responsive layouts, modern typography, and smooth UX.",
+      hostedUrl: null,
+      html_url: "https://github.com/WILD-BUGS/LogicalLords-LandingPage",
+      language: "TypeScript",
+      topics: ["landing-page", "design", "portfolio"],
+      branch: "main",
+      coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/LogicalLords-LandingPage/main/cover.png",
+      fallbackUrl: "https://raw.githubusercontent.com/WILD-BUGS/LogicalLords-LandingPage/main/banner.png"
+    },
+    {
+      name: "Vighnesh-portfolio",
+      displayName: "Vighnesh Portfolio",
+      description: "Personal developer portfolio and creative showcase highlighting full-stack projects and modern frontend craft.",
+      hostedUrl: null,
+      html_url: "https://github.com/WILD-BUGS/Vighnesh-portfolio",
+      language: "TypeScript",
+      topics: ["portfolio", "creative", "frontend"],
+      branch: "main",
+      coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/Vighnesh-portfolio/main/cover.png",
+      fallbackUrl: "https://raw.githubusercontent.com/WILD-BUGS/Vighnesh-portfolio/main/src/assets/images/project_api_vault_1788237967850.jpg"
+    }
+  ];
+
+  function renderProjects(projects) {
+    if (!projects || !projects.length) return;
     grid.innerHTML = '';
 
-    if (validRepos.length > 4) {
+    if (projects.length > 4) {
       grid.classList.add('collapsed');
       if (btnContainer) btnContainer.style.display = 'block';
     } else {
       if (btnContainer) btnContainer.style.display = 'none';
     }
 
-    // Fetch all READMEs in parallel
-    const readmeResults = await Promise.allSettled(
-      validRepos.map(repo =>
-        fetch(`https://api.github.com/repos/${ORG_NAME}/${repo.name}/readme`)
-          .then(r => r.ok ? r.json() : null)
-          .catch(() => null)
-      )
-    );
-
-    for (let i = 0; i < validRepos.length; i++) {
-      const repo = validRepos[i];
+    projects.forEach((proj, i) => {
       const isFeatured = i === 0;
-
-      // Extract hosted URL from README
-      let hostedUrl = repo.homepage || null;
-      const readmeData = readmeResults[i].status === 'fulfilled' ? readmeResults[i].value : null;
-      if (readmeData && readmeData.content) {
-        const extracted = extractHostedUrl(readmeData.content);
-        if (extracted) hostedUrl = extracted;
-      }
-
       const card = document.createElement('div');
       card.className = `project-card ${isFeatured ? 'featured ' : ''}reveal visible`;
       card.dataset.delay = (i * 0.1).toString();
 
-      const coverUrl = `https://raw.githubusercontent.com/${ORG_NAME}/${repo.name}/main/cover.jpg`;
-      const fallbackUrl = `https://raw.githubusercontent.com/${ORG_NAME}/${repo.name}/main/cover.png`;
-      const defaultImg = 'coverpics/astroid.png';
+      const branch = proj.branch || 'main';
+      // The cover image in that repo is always named cover.png
+      const coverUrl = proj.coverUrl || `https://raw.githubusercontent.com/${ORG_NAME}/${proj.name}/${branch}/cover.png`;
+      const fallbackUrl = proj.fallbackUrl || DEFAULT_COVER;
 
-      const tagsHtml = (repo.topics || []).slice(0, 3).map(t => `<span class="project-tag">${t}</span>`).join('');
-      const langHtml = repo.language ? `<span class="project-tag">${repo.language}</span>` : '';
+      const tagsHtml = (proj.topics || []).slice(0, 3).map(t => `<span class="project-tag">${t}</span>`).join('');
+      const langHtml = proj.language ? `<span class="project-tag">${proj.language}</span>` : '';
 
-      const liveLink = hostedUrl ? `
-        <a href="${hostedUrl}" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Live demo">
+      const liveLink = proj.hostedUrl ? `
+        <a href="${proj.hostedUrl}" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="Live demo">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         </a>` : '';
 
-      const thumbHref = hostedUrl || repo.html_url;
+      const thumbHref = proj.hostedUrl || proj.html_url;
+      const displayName = proj.displayName || proj.name.replace(/-/g, ' ');
 
       card.innerHTML = `
         <a href="${thumbHref}" target="_blank" rel="noopener noreferrer" class="project-thumb">
-          <img class="project-thumb-img" src="${coverUrl}" onerror="this.onerror=null; this.src='${fallbackUrl}'; this.onerror=function(){this.src='${defaultImg}'};" alt="${repo.name}" loading="lazy" />
+          <img class="project-thumb-img" src="${coverUrl}" onerror="window.handleCoverError(this, '${fallbackUrl}', '${proj.name}', '${branch}')" alt="${displayName}" loading="lazy" />
           <div class="project-thumb-overlay">
             <span class="project-view-btn">View Project →</span>
           </div>
@@ -882,11 +937,11 @@ document.addEventListener('keydown', (e) => {
           <div class="project-tags">
             ${tagsHtml || langHtml}
           </div>
-          <h3 class="project-name">${repo.name.replace(/-/g, ' ')}</h3>
-          <p class="project-desc">${repo.description || 'A brilliant project by WILD-BUGS team.'}</p>
+          <h3 class="project-name">${displayName}</h3>
+          <p class="project-desc">${proj.description || 'A brilliant project by WILD-BUGS team.'}</p>
           <div class="project-footer">
             <div class="project-links">
-              <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub">
+              <a href="${proj.html_url}" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
               </a>
               ${liveLink}
@@ -895,37 +950,53 @@ document.addEventListener('keydown', (e) => {
         </div>
       `;
       grid.appendChild(card);
-    }
+    });
 
     if (typeof window.initCardTilt === 'function') {
       window.initCardTilt();
     }
-
-    if (btn) {
-      btn.addEventListener('click', () => {
-        const isCollapsed = grid.classList.contains('collapsed');
-        if (isCollapsed) {
-          grid.classList.remove('collapsed');
-          grid.classList.add('expanded');
-          btn.classList.add('expanded');
-          btn.querySelector('span').textContent = 'Show Less';
-        } else {
-          grid.classList.add('collapsed');
-          grid.classList.remove('expanded');
-          btn.classList.remove('expanded');
-          btn.querySelector('span').textContent = 'Show More';
-          const target = document.querySelector('#projects');
-          if (target) {
-            const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 72;
-            const top = target.getBoundingClientRect().top + window.scrollY - navH;
-            window.scrollTo({ top, behavior: 'smooth' });
-          }
-        }
-      });
+    if (typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.refresh();
     }
+  }
 
-  } catch (e) {
-    console.error('Error loading projects:', e);
-    grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Failed to load projects from GitHub.</p>';
+  // Pre-render immediately with complete fallback dataset so projects display at once
+  renderProjects(FALLBACK_PROJECTS);
+
+  if (btn && !btn._hasProjectsListener) {
+    btn._hasProjectsListener = true;
+    btn.addEventListener('click', () => {
+      const isCollapsed = grid.classList.contains('collapsed');
+      if (isCollapsed) {
+        grid.classList.remove('collapsed');
+        grid.classList.add('expanded');
+        btn.classList.add('expanded');
+        btn.querySelector('span').textContent = 'Show Less';
+      } else {
+        grid.classList.add('collapsed');
+        grid.classList.remove('expanded');
+        btn.classList.remove('expanded');
+        btn.querySelector('span').textContent = 'Show More';
+        const target = document.querySelector('#projects');
+        if (target) {
+          const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 72;
+          const top = target.getBoundingClientRect().top + window.scrollY - navH;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }
+    });
+  }
+
+  // Fetch updated projects via backend proxy
+  try {
+    const apiRes = await fetch('/api/projects');
+    if (apiRes.ok) {
+      const data = await apiRes.json();
+      if (data && Array.isArray(data.projects) && data.projects.length > 0) {
+        renderProjects(data.projects);
+      }
+    }
+  } catch (err) {
+    // Retain pre-rendered fallback projects silently
   }
 })();
