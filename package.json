@@ -5,12 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "node server.js",
-    "build": "echo 'Build complete'",
+    "build": "node build.js",
     "start": "node server.js"
   },
   "dependencies": {
     "blurhash": "^2.0.5",
-    "express": "^4.21.2",
-    "sharp": "^0.35.4"
+    "express": "^4.21.2"
   }
 }
