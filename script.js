@@ -800,7 +800,23 @@ document.addEventListener('keydown', (e) => {
   const ORG_NAME = 'WILD-BUGS';
   const DEFAULT_COVER = '/default-cover.svg';
 
+  const KNOWN_BLURHASHES = {
+    "anvil.pr": "L025[T$*9FtR?vR*9G%Mx^RkD%%2",
+    "dynamic-astroid-page-for-special-ones-": "L396,o00}[%0}+5l}?OGn45m^POY",
+    "womens-world": "L13*h]10}qE4}r5m=wIqjGS2W;so",
+    "logicallords-landingpage": "L24Bwm:g9DTL~XvxM,t8EKR%%4wc",
+    "vighnesh-portfolio": "L59RbCRq03v0jQxDVXPC00vc]xG1"
+  };
+  const DEFAULT_BLURHASH = "L13[L0~q4m%M%Mt7Rjof00WB?bIU";
+
   window.handleCoverError = function(img, fallbackUrl, repoName, branch) {
+    const parent = img.parentElement;
+    const canvas = parent ? parent.querySelector('.project-thumb-blurhash') : null;
+    if (canvas) {
+      canvas.classList.remove('blurhash-fade-out');
+    }
+    img.classList.remove('blurhash-loaded');
+
     if (!img.dataset.step) img.dataset.step = '1';
     const step = img.dataset.step;
 
@@ -835,7 +851,8 @@ document.addEventListener('keydown', (e) => {
       topics: ["prompt-engineering", "evaluation", "react", "typescript"],
       branch: "main",
       coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/Anvil.pr/main/cover.png",
-      fallbackUrl: DEFAULT_COVER
+      fallbackUrl: DEFAULT_COVER,
+      blurhash: KNOWN_BLURHASHES["anvil.pr"]
     },
     {
       name: "Dynamic-Astroid-page-for-special-ones-",
@@ -847,7 +864,8 @@ document.addEventListener('keydown', (e) => {
       topics: ["animation", "canvas", "interactive", "space"],
       branch: "main",
       coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/Dynamic-Astroid-page-for-special-ones-/main/cover.png",
-      fallbackUrl: DEFAULT_COVER
+      fallbackUrl: DEFAULT_COVER,
+      blurhash: KNOWN_BLURHASHES["dynamic-astroid-page-for-special-ones-"]
     },
     {
       name: "WOMENS-WORLD",
@@ -859,7 +877,8 @@ document.addEventListener('keydown', (e) => {
       topics: ["community", "web-platform", "typescript"],
       branch: "main",
       coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/WOMENS-WORLD/main/cover.png",
-      fallbackUrl: DEFAULT_COVER
+      fallbackUrl: DEFAULT_COVER,
+      blurhash: KNOWN_BLURHASHES["womens-world"]
     },
     {
       name: "LogicalLords-LandingPage",
@@ -871,7 +890,8 @@ document.addEventListener('keydown', (e) => {
       topics: ["landing-page", "design", "portfolio"],
       branch: "main",
       coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/LogicalLords-LandingPage/main/cover.png",
-      fallbackUrl: "https://raw.githubusercontent.com/WILD-BUGS/LogicalLords-LandingPage/main/banner.png"
+      fallbackUrl: "https://raw.githubusercontent.com/WILD-BUGS/LogicalLords-LandingPage/main/banner.png",
+      blurhash: KNOWN_BLURHASHES["logicallords-landingpage"]
     },
     {
       name: "Vighnesh-portfolio",
@@ -883,7 +903,8 @@ document.addEventListener('keydown', (e) => {
       topics: ["portfolio", "creative", "frontend"],
       branch: "main",
       coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/Vighnesh-portfolio/main/cover.png",
-      fallbackUrl: "https://raw.githubusercontent.com/WILD-BUGS/Vighnesh-portfolio/main/src/assets/images/project_api_vault_1788237967850.jpg"
+      fallbackUrl: "https://raw.githubusercontent.com/WILD-BUGS/Vighnesh-portfolio/main/src/assets/images/project_api_vault_1788237967850.jpg",
+      blurhash: KNOWN_BLURHASHES["vighnesh-portfolio"]
     }
   ];
 
@@ -908,6 +929,7 @@ document.addEventListener('keydown', (e) => {
       // The cover image in that repo is always named cover.png
       const coverUrl = proj.coverUrl || `https://raw.githubusercontent.com/${ORG_NAME}/${proj.name}/${branch}/cover.png`;
       const fallbackUrl = proj.fallbackUrl || DEFAULT_COVER;
+      const blurhash = proj.blurhash || KNOWN_BLURHASHES[proj.name.toLowerCase()] || DEFAULT_BLURHASH;
 
       const tagsHtml = (proj.topics || []).slice(0, 3).map(t => `<span class="project-tag">${t}</span>`).join('');
       const langHtml = proj.language ? `<span class="project-tag">${proj.language}</span>` : '';
@@ -922,6 +944,7 @@ document.addEventListener('keydown', (e) => {
 
       card.innerHTML = `
         <a href="${thumbHref}" target="_blank" rel="noopener noreferrer" class="project-thumb">
+          <canvas class="project-thumb-blurhash"></canvas>
           <img class="project-thumb-img" src="${coverUrl}" onerror="window.handleCoverError(this, '${fallbackUrl}', '${proj.name}', '${branch}')" alt="${displayName}" loading="lazy" />
           <div class="project-thumb-overlay">
             <span class="project-view-btn">View Project →</span>
@@ -949,6 +972,27 @@ document.addEventListener('keydown', (e) => {
           </div>
         </div>
       `;
+
+      const canvas = card.querySelector('.project-thumb-blurhash');
+      const img = card.querySelector('.project-thumb-img');
+
+      if (window.BlurHash && canvas) {
+        window.BlurHash.renderToCanvas(blurhash, canvas, 32, 18);
+      }
+
+      const onImageLoaded = () => {
+        img.classList.add('blurhash-loaded');
+        if (canvas) {
+          canvas.classList.add('blurhash-fade-out');
+        }
+      };
+
+      if (img.complete && img.naturalWidth > 0) {
+        requestAnimationFrame(onImageLoaded);
+      } else {
+        img.addEventListener('load', onImageLoaded);
+      }
+
       grid.appendChild(card);
     });
 

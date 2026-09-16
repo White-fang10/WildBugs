@@ -11,6 +11,15 @@ const PORT = 3000;
 // Serve static assets from project root
 app.use(express.static(__dirname));
 
+const KNOWN_BLURHASHES = {
+  "anvil.pr": "L025[T$*9FtR?vR*9G%Mx^RkD%%2",
+  "dynamic-astroid-page-for-special-ones-": "L396,o00}[%0}+5l}?OGn45m^POY",
+  "womens-world": "L13*h]10}qE4}r5m=wIqjGS2W;so",
+  "logicallords-landingpage": "L24Bwm:g9DTL~XvxM,t8EKR%%4wc",
+  "vighnesh-portfolio": "L59RbCRq03v0jQxDVXPC00vc]xG1"
+};
+const DEFAULT_BLURHASH = "L13[L0~q4m%M%Mt7Rjof00WB?bIU";
+
 const FALLBACK_PROJECTS = [
   {
     name: "Anvil.pr",
@@ -23,7 +32,8 @@ const FALLBACK_PROJECTS = [
     topics: ["prompt-engineering", "evaluation", "react", "typescript"],
     branch: "main",
     coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/Anvil.pr/main/cover.png",
-    fallbackUrl: "/default-cover.svg"
+    fallbackUrl: "/default-cover.svg",
+    blurhash: KNOWN_BLURHASHES["anvil.pr"]
   },
   {
     name: "Dynamic-Astroid-page-for-special-ones-",
@@ -36,7 +46,8 @@ const FALLBACK_PROJECTS = [
     topics: ["animation", "canvas", "interactive", "space"],
     branch: "main",
     coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/Dynamic-Astroid-page-for-special-ones-/main/cover.png",
-    fallbackUrl: "/default-cover.svg"
+    fallbackUrl: "/default-cover.svg",
+    blurhash: KNOWN_BLURHASHES["dynamic-astroid-page-for-special-ones-"]
   },
   {
     name: "WOMENS-WORLD",
@@ -49,7 +60,8 @@ const FALLBACK_PROJECTS = [
     topics: ["community", "web-platform", "typescript"],
     branch: "main",
     coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/WOMENS-WORLD/main/cover.png",
-    fallbackUrl: "/default-cover.svg"
+    fallbackUrl: "/default-cover.svg",
+    blurhash: KNOWN_BLURHASHES["womens-world"]
   },
   {
     name: "LogicalLords-LandingPage",
@@ -62,7 +74,8 @@ const FALLBACK_PROJECTS = [
     topics: ["landing-page", "design", "portfolio"],
     branch: "main",
     coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/LogicalLords-LandingPage/main/cover.png",
-    fallbackUrl: "https://raw.githubusercontent.com/WILD-BUGS/LogicalLords-LandingPage/main/banner.png"
+    fallbackUrl: "https://raw.githubusercontent.com/WILD-BUGS/LogicalLords-LandingPage/main/banner.png",
+    blurhash: KNOWN_BLURHASHES["logicallords-landingpage"]
   },
   {
     name: "Vighnesh-portfolio",
@@ -75,7 +88,8 @@ const FALLBACK_PROJECTS = [
     topics: ["portfolio", "creative", "frontend"],
     branch: "main",
     coverUrl: "https://raw.githubusercontent.com/WILD-BUGS/Vighnesh-portfolio/main/cover.png",
-    fallbackUrl: "https://raw.githubusercontent.com/WILD-BUGS/Vighnesh-portfolio/main/src/assets/images/project_api_vault_1788237967850.jpg"
+    fallbackUrl: "https://raw.githubusercontent.com/WILD-BUGS/Vighnesh-portfolio/main/src/assets/images/project_api_vault_1788237967850.jpg",
+    blurhash: KNOWN_BLURHASHES["vighnesh-portfolio"]
   }
 ];
 
@@ -123,6 +137,9 @@ async function fetchFromGitHub() {
         fallbackUrl = `https://raw.githubusercontent.com/${ORG_NAME}/${repo.name}/${branch}/src/assets/images/project_api_vault_1788237967850.jpg`;
       }
 
+      const lowerName = repo.name.toLowerCase();
+      const blurhash = KNOWN_BLURHASHES[lowerName] || DEFAULT_BLURHASH;
+
       return {
         name: repo.name,
         displayName: repo.name.replace(/-/g, ' '),
@@ -134,7 +151,8 @@ async function fetchFromGitHub() {
         topics: repo.topics || [],
         branch,
         coverUrl,
-        fallbackUrl
+        fallbackUrl,
+        blurhash
       };
     })
   );
