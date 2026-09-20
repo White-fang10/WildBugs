@@ -901,6 +901,12 @@ input, textarea { font-family: inherit; }
   margin-top: 56px;
 }
 .team-grid-5 { grid-template-columns: repeat(5, 1fr); }
+.team-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 1040px;
+  margin-left: auto;
+  margin-right: auto;
+}
 @media (max-width: 1200px) {
   .team-grid-5 { grid-template-columns: repeat(3, 1fr); }
 }
@@ -931,7 +937,7 @@ input, textarea { font-family: inherit; }
   transform: translateY(-6px);
 }
 .team-avatar {
-  width: 88px; height: 88px;
+  width: 96px; height: 96px;
   border-radius: 50%;
   margin: 0 auto 16px;
   overflow: hidden;
@@ -939,9 +945,23 @@ input, textarea { font-family: inherit; }
   display: flex; align-items: center; justify-content: center;
   box-shadow: var(--neu-raised-sm);
   transition: all var(--transition);
+  position: relative;
+  border: 3px solid rgba(255, 255, 255, 0.7);
+}
+.team-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .team-card:hover .team-avatar {
-  box-shadow: 0 0 0 3px var(--green), 4px 4px 12px rgba(0,0,0,0.12);
+  box-shadow: 0 0 0 3px var(--green), 6px 6px 16px rgba(58, 158, 95, 0.25);
+  transform: translateY(-2px);
+}
+.team-card:hover .team-avatar-img {
+  transform: scale(1.08);
 }
 .team-name {
   font-family: var(--font-display);
@@ -1443,13 +1463,13 @@ footer {
   .team-grid { grid-template-columns: repeat(2, 1fr); }
   .cursor-dot, .cursor-ring { display: none; }
   .projects-header { flex-direction: column; align-items: flex-start; }
-  .team-grid-5 { grid-template-columns: repeat(2, 1fr) !important; }
+  .team-grid-5, .team-grid-3 { grid-template-columns: repeat(2, 1fr) !important; }
   .orbit-pill { display: none; }
 }
 
 @media (max-width: 480px) {
   .team-grid { grid-template-columns: 1fr; }
-  .team-grid-5 { grid-template-columns: 1fr !important; }
+  .team-grid-5, .team-grid-3 { grid-template-columns: 1fr !important; }
   .section-title { font-size: 2.1rem; }
   .hero-title { font-size: 2.3rem; }
   .contact-form-wrap { padding: 24px; }

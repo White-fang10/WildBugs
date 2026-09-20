@@ -33,4 +33,18 @@ for (const file of filesToCopy) {
   }
 }
 
+// Copy avatars folder
+const avatarsSrcDir = path.join(__dirname, 'avatars');
+const avatarsDestDir = path.join(publicDir, 'avatars');
+if (fs.existsSync(avatarsSrcDir)) {
+  if (!fs.existsSync(avatarsDestDir)) {
+    fs.mkdirSync(avatarsDestDir, { recursive: true });
+  }
+  const avatarFiles = fs.readdirSync(avatarsSrcDir);
+  for (const aFile of avatarFiles) {
+    fs.copyFileSync(path.join(avatarsSrcDir, aFile), path.join(avatarsDestDir, aFile));
+    console.log(`Copied avatars/${aFile} -> public/avatars/${aFile}`);
+  }
+}
+
 console.log('Build completed successfully. Output directory "public" prepared.');
