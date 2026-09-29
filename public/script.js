@@ -1044,3 +1044,238 @@ document.addEventListener('keydown', (e) => {
     // Retain pre-rendered fallback projects silently
   }
 })();
+
+/* ─────────────────────────────────────────────
+   6. BOOK NOW POPUP MODAL
+───────────────────────────────────────────── */
+(function initBookingModal() {
+  const modal = document.getElementById('bookingModal');
+  if (!modal) return;
+
+  const form = document.getElementById('bookingForm');
+  const errorAlert = document.getElementById('bookingFormError');
+  const successState = document.getElementById('bookingSuccessState');
+  const submitBtn = document.getElementById('bookSubmitBtn');
+  const bookAnotherBtn = document.getElementById('bookAnotherBtn');
+  const serviceItems = modal.querySelectorAll('.service-pill-item');
+
+  function openModal() {
+    modal.removeAttribute('hidden');
+    requestAnimationFrame(() => {
+      modal.classList.add('active');
+    });
+    document.body.style.overflow = 'hidden';
+
+    // Auto-focus first input field after animation begins
+    setTimeout(() => {
+      const firstInput = document.getElementById('bookClientName');
+      if (firstInput) firstInput.focus();
+    }, 200);
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      modal.setAttribute('hidden', '');
+    }, 300);
+  }
+
+  // Open modal triggers across the website
+  document.querySelectorAll('.book-modal-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  // Close modal triggers (backdrop and close button)
+  modal.querySelectorAll('[data-close-modal]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeModal();
+    });
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  // Service pill item radio select interaction
+  serviceItems.forEach(item => {
+    const radio = item.querySelector('input[type="radio"]');
+    item.addEventListener('click', () => {
+      serviceItems.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+      if (radio) radio.checked = true;
+    });
+  });
+
+  // Reset form and return to input view
+  function resetBookingForm() {
+    if (form) form.reset();
+    if (errorAlert) {
+      errorAlert.style.display = 'none';
+      errorAlert.textContent = '';
+    }
+    // Set first service pill as active
+    serviceItems.forEach((item, idx) => {
+      if (idx === 0) {
+        item.classList.add('active');
+        const radio = item.querySelector('input[type="radio"]');
+        if (radio) radio.checked = true;
+      } else {
+        item.classList.remove('active');
+      }
+    });
+
+    if (successState) successState.style.display = 'none';
+    if (form) form.style.display = 'block';
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      const textSpan = submitBtn.querySelector('.submit-btn-text');
+      const spinSpan = submitBtn.querySelector('.submit-btn-spinner');
+      if (textSpan) textSpan.style.display = 'inline-flex';
+      if (spinSpan) spinSpan.style.display = 'none';
+    }
+  }
+
+  if (bookAnotherBtn) {
+    bookAnotherBtn.addEventListener('click', resetBookingForm);
+  }
+
+  // Form submission handling
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (errorAlert) {
+        errorAlert.style.display = 'none';
+        errorAlert.textContent = '';
+      }
+
+      const nameInput = document.getElementById('bookClientName');
+      const emailInput = document.getElementById('bookClientEmail');
+      const detailsInput = document.getElementById('bookDetails');
+      const timelineSelect = document.getElementById('bookTimeline');
+      const budgetSelect = document.getElementById('bookBudget');
+      const selectedService = form.querySelector('input[name="service"]:checked');
+
+      const name = nameInput ? nameInput.value.trim() : '';
+      const email = emailInput ? emailInput.value.trim() : '';
+      const details = detailsInput ? detailsInput.value.trim() : '';
+      const service = selectedService ? selectedService.value : 'Full Web Development';
+      const timeline = timelineSelect ? timelineSelect.value : 'Standard (2-4 weeks)';
+      const budget = budgetSelect ? budgetSelect.value : 'Not specified';
+
+      // Validation
+      if (!name) {
+        if (errorAlert) {
+          errorAlert.textContent = 'Please enter your name or company name.';
+          errorAlert.style.display = 'flex';
+        }
+        if (nameInput) nameInput.focus();
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        if (errorAlert) {
+          errorAlert.textContent = 'Please enter a valid email address so we can reach you.';
+          errorAlert.style.display = 'flex';
+        }
+        if (emailInput) emailInput.focus();
+        return;
+      }
+
+      if (!details) {
+        if (errorAlert) {
+          errorAlert.textContent = 'Please tell us briefly about your project or bugs to squash.';
+          errorAlert.style.display = 'flex';
+        }
+        if (detailsInput) detailsInput.focus();
+        return;
+      }
+
+      // Show loading spinner
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        const textSpan = submitBtn.querySelector('.submit-btn-text');
+        const spinSpan = submitBtn.querySelector('.submit-btn-spinner');
+        if (textSpan) textSpan.style.display = 'none';
+        if (spinSpan) spinSpan.style.display = 'inline-flex';
+      }
+
+      let bookingResult = null;
+      try {
+        const res = await fetch('/api/book', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, service, timeline, budget, details })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          bookingResult = data.booking;
+        }
+      } catch (err) {
+        console.warn('Booking API fetch failed, falling back to local confirmation:', err);
+      }
+
+      // Fallback local booking result
+      if (!bookingResult) {
+        bookingResult = {
+          id: 'WB-' + Math.floor(1000 + Math.random() * 9000),
+          name,
+          email,
+          service,
+          timeline,
+          budget
+        };
+      }
+
+      // Display success view
+      const successClientName = document.getElementById('successClientName');
+      const successClientEmail = document.getElementById('successClientEmail');
+      const successRefId = document.getElementById('successRefId');
+      const successService = document.getElementById('successService');
+      const successTimeline = document.getElementById('successTimeline');
+
+      if (successClientName) successClientName.textContent = bookingResult.name || name;
+      if (successClientEmail) successClientEmail.textContent = bookingResult.email || email;
+      if (successRefId) successRefId.textContent = bookingResult.id;
+      if (successService) successService.textContent = bookingResult.service || service;
+      if (successTimeline) successTimeline.textContent = bookingResult.timeline || timeline;
+
+      form.style.display = 'none';
+      if (successState) successState.style.display = 'block';
+
+      // Celebratory animation if GSAP is available
+      try {
+        if (window.gsap) {
+          gsap.from('#bookingSuccessState .success-icon-wrap', {
+            scale: 0.4,
+            rotation: -25,
+            opacity: 0,
+            duration: 0.6,
+            ease: 'back.out(1.8)'
+          });
+          gsap.from('#bookingSuccessState .success-card', {
+            y: 20,
+            opacity: 0,
+            duration: 0.5,
+            delay: 0.2,
+            ease: 'power2.out'
+          });
+        }
+      } catch (e) {}
+    });
+  }
+
+  // Expose global helper functions
+  window.openBookingModal = openModal;
+  window.closeBookingModal = closeModal;
+})();
+

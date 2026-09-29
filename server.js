@@ -10,6 +10,28 @@ const PORT = 3000;
 
 // Serve static assets from project root
 app.use(express.static(__dirname));
+app.use(express.json());
+
+const bookingRequests = [];
+app.post('/api/book', (req, res) => {
+  const { name, email, service, timeline, budget, details } = req.body || {};
+  if (!name || !email || !details) {
+    return res.status(400).json({ success: false, error: 'Please provide name, email, and project details.' });
+  }
+  const booking = {
+    id: 'WB-' + Math.floor(1000 + Math.random() * 9000),
+    name: String(name).trim(),
+    email: String(email).trim(),
+    service: service || 'Full Web Development',
+    timeline: timeline || 'Standard (2-4 weeks)',
+    budget: budget || 'Not specified',
+    details: String(details).trim(),
+    createdAt: new Date().toISOString()
+  };
+  bookingRequests.push(booking);
+  console.log('New Booking Received:', booking);
+  return res.json({ success: true, booking });
+});
 
 const KNOWN_BLURHASHES = {
   "anvil.pr": "L025[T$*9FtR?vR*9G%Mx^RkD%%2",

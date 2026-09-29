@@ -8,6 +8,17 @@
   <meta property="og:title" content="Wild Bugs — Creative Web Development Team" />
   <meta property="og:description" content="We build clean, powerful websites — without the bugs. Modern, interactive, and beautiful web experiences." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="wildbugs-logo.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="wildbugs-logo.png" />
+
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/png" href="wildbugs-logo.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="wildbugs-logo.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="wildbugs-logo.png" />
+  <link rel="shortcut icon" href="wildbugs-logo.png" type="image/png" />
+  <link rel="apple-touch-icon" href="wildbugs-logo.png" />
+
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="animations.css" />
   <!-- Preconnect for Google Fonts -->
@@ -50,6 +61,15 @@
   <div class="cursor-ring" id="cursorRing"></div>
   <div id="cursorLabel"></div>
 
+  <!-- ─── Floating Circular Book Now Button ─── -->
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7wYkgnkHY_8cyQ9ISjkXbqeVC5yhGembN8ep1onM-06C41Q/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer" id="floatingBookBtn" class="floating-neu-book-btn" aria-label="Book project with Wild Bugs on Google Forms" title="Book Now via Google Form">
+    <div class="floating-btn-inner">
+      <i class="bx bxs-calendar-check"></i>
+      <span class="floating-btn-pulse"></span>
+    </div>
+    <span class="floating-btn-tooltip">Book Now</span>
+  </a>
+
   <!-- ─── Back to Top ─── -->
   <button id="back-top" aria-label="Back to top">↑</button>
 
@@ -69,7 +89,16 @@
         <li><a href="#skills" class="nav-link">Skills</a></li>
         <li><a href="#team" class="nav-link">Team</a></li>
         <li><a href="#process" class="nav-link">Process</a></li>
-        <li><a href="#contact" class="nav-link nav-cta btn btn-primary btn-sm">Say Hello <i class="bx bxs-bug"></i></a></li>
+        <li>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7wYkgnkHY_8cyQ9ISjkXbqeVC5yhGembN8ep1onM-06C41Q/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer" class="neu-circle-book-btn" id="navBookNowBtn" aria-label="Book project with Wild Bugs on Google Forms" title="Book Now via Google Form">
+            <span class="neu-circle-disc">
+              <i class="bx bxs-calendar-check"></i>
+              <span class="neu-circle-subtext">Book</span>
+              <span class="neu-circle-pulse"></span>
+            </span>
+            <span class="neu-circle-tooltip">Book Now</span>
+          </a>
+        </li>
       </ul>
 
       <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
@@ -85,6 +114,12 @@
     <a href="#team" class="nav-link" data-close-nav>Team</a>
     <a href="#process" class="nav-link" data-close-nav>Process</a>
     <a href="#contact" class="nav-link" data-close-nav>Contact</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7wYkgnkHY_8cyQ9ISjkXbqeVC5yhGembN8ep1onM-06C41Q/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer" class="neu-mobile-book-btn" data-close-nav aria-label="Book project with Wild Bugs on Google Forms">
+      <div class="neu-mobile-circle">
+        <i class="bx bxs-calendar-check"></i>
+      </div>
+      <span class="neu-mobile-text">Book Now</span>
+    </a>
   </div>
 
   <!-- ============================================
@@ -560,12 +595,12 @@
         </div>
 
         <!-- Member 3 -->
-        <div class="team-card reveal reveal-delay-2" id="team-card-nitish">
-          <div class="team-avatar" id="team-avatar-nitish">
+        <div class="team-card reveal reveal-delay-2" id="team-card-nithish">
+          <div class="team-avatar" id="team-avatar-nithish">
             <img 
-              id="team-avatar-img-nitish"
-              src="avatars/nitish-bug.jpg" 
-              alt="Nitish - Backend Engineer Bug Mascot"
+              id="team-avatar-img-nithish"
+              src="avatars/nithish-bug.jpg" 
+              alt="Nithish - Backend Engineer Bug Mascot"
               class="team-avatar-img"
               width="96"
               height="96"
@@ -574,7 +609,7 @@
               referrerPolicy="no-referrer"
             />
           </div>
-          <h3 class="team-name">Nitish</h3>
+          <h3 class="team-name">Nithish</h3>
           <div class="team-role">Backend Engineer</div>
           <p class="team-tagline">"If it's not tested, it's broken <i class="bx bxs-wrench"></i>"</p>
           <div class="team-socials">
@@ -680,16 +715,17 @@
         <!-- Right CTA -->
         <div class="contact-form-wrap reveal reveal-delay-2">
           <div class="booking-cta">
-            <div class="booking-cta-icon">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7wYkgnkHY_8cyQ9ISjkXbqeVC5yhGembN8ep1onM-06C41Q/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer" class="booking-cta-circle-btn" aria-label="Book our service via Google Forms" title="Click to Book via Google Form">
               <i class="bx bxs-calendar-check"></i>
-            </div>
+              <span class="cta-circle-pulse"></span>
+            </a>
             <h3 class="booking-cta-title">Book Our Service</h3>
-            <p class="booking-cta-desc">Ready to kick off your project? Fill out our quick booking form and we'll get back to you within 24 hours to plan the next steps together.</p>
-            <a id="bookingFormBtn" href="https://docs.google.com/forms/d/e/1FAIpQLSd7wYkgnkHY_8cyQ9ISjkXbqeVC5yhGembN8ep1onM-06C41Q/viewform?usp=publish-editor" class="btn btn-primary btn-send booking-btn" target="_blank" rel="noopener noreferrer">
+            <p class="booking-cta-desc">Ready to kick off your project? Fill out our booking form on Google Forms and we'll get back to you within 24 hours to plan the next steps together.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7wYkgnkHY_8cyQ9ISjkXbqeVC5yhGembN8ep1onM-06C41Q/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer" id="bookingFormBtn" class="btn btn-primary btn-send booking-btn">
               <span class="btn-send-text">Book Now <i class="bx bx-calendar-plus"></i></span>
               <span class="bug-sender"><i class="bx bxs-bug"></i></span>
             </a>
-            <p class="booking-note"><i class="bx bx-info-circle"></i> Complete our form or reach us directly at <a href="mailto:wildbugs2026@gmail.com" style="color:var(--primary)">wildbugs2026@gmail.com</a></p>
+            <p class="booking-note"><i class="bx bx-info-circle"></i> Direct Google Form: <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7wYkgnkHY_8cyQ9ISjkXbqeVC5yhGembN8ep1onM-06C41Q/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer" style="color:var(--green); text-decoration: underline;">Google Form</a>. Email: <a href="mailto:wildbugs2026@gmail.com" style="color:var(--green)">wildbugs2026@gmail.com</a></p>
           </div>
         </div>
       </div>
@@ -756,6 +792,196 @@
       </div>
     </div>
   </footer>
+
+  <!-- ============================================
+       BOOK NOW MODAL POPUP
+  ============================================ -->
+  <div id="bookingModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalBookingTitle" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-container">
+      <!-- Close Button -->
+      <button type="button" class="modal-close-btn" data-close-modal aria-label="Close booking modal">
+        <i class="bx bx-x"></i>
+      </button>
+
+      <!-- Modal Content Wrapper -->
+      <div class="modal-scroll-content">
+        <!-- Header -->
+        <div class="modal-header">
+          <div class="modal-badge">
+            <i class="bx bxs-bug"></i>
+            <span>Wild Bugs Squad</span>
+          </div>
+          <h2 id="modalBookingTitle" class="modal-title">Book a Project With Us</h2>
+          <p class="modal-subtitle">
+            Tell us about your idea, timeline, and requirements. We squash bugs, craft responsive code, and ship lightning-fast websites.
+          </p>
+        </div>
+
+        <!-- Booking Form -->
+        <form id="bookingForm" class="booking-modal-form" novalidate>
+          <!-- Service Type Selection -->
+          <div class="form-group">
+            <label class="form-label">Select Service <span class="required-star">*</span></label>
+            <div class="service-pills-grid" role="radiogroup" aria-label="Select service">
+              <label class="service-pill-item active">
+                <input type="radio" name="service" value="Full Web Development" checked />
+                <span class="service-pill-card">
+                  <i class="bx bx-code-alt"></i>
+                  <span class="service-pill-text">
+                    <strong>Full Web Dev</strong>
+                    <small>Custom websites & web apps</small>
+                  </span>
+                </span>
+              </label>
+              <label class="service-pill-item">
+                <input type="radio" name="service" value="UI/UX & Frontend" />
+                <span class="service-pill-card">
+                  <i class="bx bx-layout"></i>
+                  <span class="service-pill-text">
+                    <strong>UI/UX & Frontend</strong>
+                    <small>Modern design & interactive UX</small>
+                  </span>
+                </span>
+              </label>
+              <label class="service-pill-item">
+                <input type="radio" name="service" value="Bug Fixing & Code Audit" />
+                <span class="service-pill-card">
+                  <i class="bx bxs-bug"></i>
+                  <span class="service-pill-text">
+                    <strong>Bug Squashing</strong>
+                    <small>Fix issues & code audits</small>
+                  </span>
+                </span>
+              </label>
+              <label class="service-pill-item">
+                <input type="radio" name="service" value="Speed & SEO Optimization" />
+                <span class="service-pill-card">
+                  <i class="bx bx-rocket"></i>
+                  <span class="service-pill-text">
+                    <strong>Speed & SEO</strong>
+                    <small>Performance & top rankings</small>
+                  </span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Name & Email Row -->
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="bookClientName" class="form-label">Your Name / Company <span class="required-star">*</span></label>
+              <div class="input-with-icon">
+                <i class="bx bx-user input-icon"></i>
+                <input type="text" id="bookClientName" name="name" class="modal-input" placeholder="e.g. Alex Morgan" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="bookClientEmail" class="form-label">Email Address <span class="required-star">*</span></label>
+              <div class="input-with-icon">
+                <i class="bx bx-envelope input-icon"></i>
+                <input type="email" id="bookClientEmail" name="email" class="modal-input" placeholder="alex@company.com" required />
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline & Budget Row -->
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="bookTimeline" class="form-label">Preferred Timeline</label>
+              <div class="input-with-icon">
+                <i class="bx bx-time-five input-icon"></i>
+                <select id="bookTimeline" name="timeline" class="modal-input modal-select">
+                  <option value="Urgent (1-2 weeks)">Urgent (1-2 weeks)</option>
+                  <option value="Standard (2-4 weeks)" selected>Standard (2-4 weeks)</option>
+                  <option value="1-2 months">1-2 months</option>
+                  <option value="Flexible / Exploration">Flexible / Exploration</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="bookBudget" class="form-label">Estimated Budget</label>
+              <div class="input-with-icon">
+                <i class="bx bx-dollar-circle input-icon"></i>
+                <select id="bookBudget" name="budget" class="modal-input modal-select">
+                  <option value="$500 - $1,500">$500 - $1,500</option>
+                  <option value="$1,500 - $3,500" selected>$1,500 - $3,500</option>
+                  <option value="$3,500 - $7,500">$3,500 - $7,500</option>
+                  <option value="$7,500+ / Enterprise">$7,500+ / Enterprise</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Details Textarea -->
+          <div class="form-group">
+            <label for="bookDetails" class="form-label">Tell us about your project <span class="required-star">*</span></label>
+            <textarea id="bookDetails" name="details" class="modal-input modal-textarea" rows="4" placeholder="Briefly describe what you'd like us to build, any bugs to squash, features needed, or existing links..." required></textarea>
+          </div>
+
+          <!-- Form Error Alert -->
+          <div id="bookingFormError" class="modal-form-alert" style="display: none;"></div>
+
+          <!-- Modal Actions -->
+          <div class="modal-form-actions">
+            <button type="submit" id="bookSubmitBtn" class="btn btn-primary modal-submit-btn">
+              <span class="submit-btn-text">Confirm Booking <i class="bx bx-check-circle"></i></span>
+              <span class="submit-btn-spinner" style="display: none;"><i class="bx bx-loader-alt bx-spin"></i> Submitting...</span>
+            </button>
+
+            <div class="modal-secondary-actions">
+              <span class="divider-text">or</span>
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSd7wYkgnkHY_8cyQ9ISjkXbqeVC5yhGembN8ep1onM-06C41Q/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer" class="modal-external-link">
+                Fill Google Form instead <i class="bx bx-link-external"></i>
+              </a>
+            </div>
+          </div>
+        </form>
+
+        <!-- Success State (Shown after submission) -->
+        <div id="bookingSuccessState" class="modal-success-state" style="display: none;">
+          <div class="success-icon-wrap">
+            <div class="success-bug-ring"></div>
+            <i class="bx bxs-check-shield success-icon"></i>
+          </div>
+          <h3 class="success-title">Booking Request Received!</h3>
+          <p class="success-desc">
+            Thanks for reaching out, <strong id="successClientName">there</strong>! We've registered your project booking inquiry.
+          </p>
+
+          <div class="success-card">
+            <div class="success-card-row">
+              <span class="sc-label">Reference ID:</span>
+              <span class="sc-val" id="successRefId">WB-7824</span>
+            </div>
+            <div class="success-card-row">
+              <span class="sc-label">Service:</span>
+              <span class="sc-val" id="successService">Full Web Development</span>
+            </div>
+            <div class="success-card-row">
+              <span class="sc-label">Target Timeline:</span>
+              <span class="sc-val" id="successTimeline">Standard (2-4 weeks)</span>
+            </div>
+            <div class="success-card-row">
+              <span class="sc-label">Response:</span>
+              <span class="sc-val text-green">Guaranteed within 24 hours</span>
+            </div>
+          </div>
+
+          <p class="success-email-note">
+            A confirmation will be sent to <span id="successClientEmail" class="highlight-email"></span>. Need an immediate response? You can also email us directly at <a href="mailto:wildbugs2026@gmail.com" class="text-green font-semibold">wildbugs2026@gmail.com</a>.
+          </p>
+
+          <div class="success-actions">
+            <button type="button" class="btn btn-primary" data-close-modal>Done <i class="bx bx-check"></i></button>
+            <button type="button" id="bookAnotherBtn" class="btn btn-outline btn-sm">Book Another Request</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- GSAP + ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>

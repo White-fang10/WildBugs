@@ -21,7 +21,9 @@ const filesToCopy = [
   'animations.js',
   'blurhash-client.js',
   'default-cover.svg',
-  'wildbugs-logo.png'
+  'wildbugs-logo.png',
+  'favicon.ico',
+  'favicon.png'
 ];
 
 for (const file of filesToCopy) {
